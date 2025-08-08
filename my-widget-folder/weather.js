@@ -58,3 +58,4 @@ function showError() {
   descriptionEl.textContent = "";
   weatherIcon.src = iconMap.Default;
 }
+
