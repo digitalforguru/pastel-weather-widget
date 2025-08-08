@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pastel Weather Widget</title>
 
-<!-- Google Font: Quicksand (light and regular) -->
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap" rel="stylesheet" />
+<!-- Google Font: Quicksand -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
   body {
@@ -15,92 +15,57 @@
     align-items: center;
     height: 100vh;
     font-family: 'Quicksand', sans-serif;
-    background-color: #fdfdfd; /* neutral background */
+    background-color: #fdfdfd;
     margin: 0;
   }
 
   .widget {
     text-align: center;
-    border-radius: 20px;
-    padding: 25px;
-    width: 240px;
-    box-shadow: 0 8px 20px rgba(179, 74, 105, 0.15);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    color: #b34a69; /* default pink text */
+    border-radius: 15px;
+    padding: 20px;
+    width: 220px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    color: white;
     user-select: none;
-    cursor: default;
-  }
-  .widget:hover {
-    box-shadow: 0 12px 25px rgba(179, 74, 105, 0.25);
-    transform: translateY(-4px);
   }
 
-  /* Pastel background themes */
-  .pink {
-    background-color: #f7f1e8;
-    color: #b34a69;
-  }
-  .sage {
-    background-color: #b8d8ba;
-    color: #3a4a32;
-  }
-  .lavender {
-    background-color: #cdb4db;
-    color: #4a3a64;
-  }
-  .sky {
-    background-color: #a2d2ff;
-    color: #243447;
-  }
+  .pink { background-color: #f8b4d9; }
+  .sage { background-color: #b8d8ba; color: #3a4a32; }
+  .lavender { background-color: #cdb4db; color: #4a3a64; }
+  .sky { background-color: #a2d2ff; color: #243447; }
 
   h2 {
-    margin: 0 0 12px 0;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    font-size: 1.6rem;
+    margin: 0 0 10px 0;
+    font-weight: 500;
   }
 
   #location {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
 
   #temperature {
-    font-size: 3rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
   }
 
   #description {
     font-style: italic;
-    font-weight: 300;
-    margin-bottom: 20px;
+    font-weight: 400;
+    margin-bottom: 15px;
     text-transform: capitalize;
   }
 
   select {
-    padding: 6px 12px;
-    border-radius: 9999px; /* pill shape */
-    border: 1px solid #d8cfcf;
-    background-color: #fcddec;
-    color: #b34a69;
+    padding: 5px 8px;
+    border-radius: 8px;
+    border: none;
     font-weight: 500;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.3s ease;
-  }
-  select:hover {
-    background-color: #f9bbca;
-  }
-
-  /* Weather icon styles */
-  #description img {
-    vertical-align: middle;
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
   }
 </style>
 </head>
@@ -119,55 +84,6 @@
   </select>
 </div>
 
-<script>
-  const API_KEY = "8b38a4d3d6920110547bdaef3d73c0ba"; // <-- Replace with your API key
-
-  const widget = document.querySelector('.widget');
-  const themeSelector = document.getElementById('themeSelector');
-  const locationEl = document.getElementById('location');
-  const temperatureEl = document.getElementById('temperature');
-  const descriptionEl = document.getElementById('description');
-
-  // Theme change handler
-  themeSelector.addEventListener('change', () => {
-    widget.classList.remove('pink', 'sage', 'lavender', 'sky');
-    widget.classList.add(themeSelector.value);
-  });
-
-  // Fetch weather using geolocation
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showWeather, showError);
-  } else {
-    locationEl.textContent = "Geolocation not supported";
-  }
-
-  function showWeather(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
-      .then(response => response.json())
-      .then(data => {
-        locationEl.textContent = data.name || "Unknown location";
-        temperatureEl.textContent = `${Math.round(data.main.temp)}°C`;
-
-        const iconCode = data.weather[0].icon;
-        const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-
-        descriptionEl.innerHTML = `<img src="${iconUrl}" alt="weather icon" /> ${data.weather[0].description}`;
-      })
-      .catch(() => {
-        locationEl.textContent = "Couldn't get weather";
-        temperatureEl.textContent = "";
-        descriptionEl.textContent = "";
-      });
-  }
-
-  function showError() {
-    locationEl.textContent = "Couldn't get location";
-    temperatureEl.textContent = "";
-    descriptionEl.textContent = "";
-  }
-</script>
-
+<script src="weather.js"></script>
 </body>
 </html>
