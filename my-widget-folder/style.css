@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #fdfdfd;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.theme-control {
+  margin-bottom: 10px;
+}
+
+.widget {
+  width: 200px;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  color: white;
+}
+
+.weather-icon img {
+  width: 60px;
+  height: 60px;
+}
+
+.location {
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
+.temperature {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+
+/* Color themes */
+.pink { background: #f8a5c2; }
+.sage { background: #a3c9a8; }
+.lavender { background: #c3aed6; }
+.sky { background: #87ceeb; }
