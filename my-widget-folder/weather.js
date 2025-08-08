@@ -11,7 +11,7 @@ const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53
 
 // Custom icon mapping - replace URLs with your custom icon links
 const iconMap = {
-  "Clear": "https://i.pinimg.com/originals/f6/99/45/f6994503c6a4011c2c5149e54f3374a6.gif",
+  "Clear": "https://i.pinimg.com/originals/e7/19/fc/e719fc49e7e4bdcbc369f9f3145b77b3.gif",
   "Clouds": "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif",
   "Rain": "https://i.pinimg.com/originals/2e/50/b8/2e50b8f6c94ecce01cbc30eb275fc6ea.gif",
   "Snow": "https://i.pinimg.com/originals/6e/36/7c/6e367ce95ab109121d03f12ed7d250c8.gif",
