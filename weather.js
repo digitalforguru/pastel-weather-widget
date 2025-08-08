@@ -1,49 +1,52 @@
-const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba"; // replace with your OpenWeather API key
+// Elements
+const weatherWidget = document.getElementById("weatherWidget");
+const weatherIcon = document.getElementById("weatherIcon");
+const temperatureElement = document.getElementById("temperature");
+const descriptionElement = document.getElementById("description");
+const themeSelector = document.getElementById("themeSelector");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const locationElement = document.getElementById("location");
-  const temperatureElement = document.getElementById("temperature");
-  const descriptionElement = document.getElementById("description");
-  const iconElement = document.getElementById("weatherIcon");
-  const widget = document.querySelector(".widget");
-  const themeSelector = document.getElementById("themeSelector");
+// Your pretty Pinterest cloud PNG
+const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 
-  // Theme change
-  themeSelector.addEventListener("change", (e) => {
-    widget.className = "widget " + e.target.value;
-  });
+// Weather API setup
+const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba"; // Replace with your OpenWeatherMap API key
 
-  // Get location & weather
+// Get location & weather
+function getWeather() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Always use the pretty cloud PNG
+          weatherIcon.src = cloudIconURL;
+          weatherIcon.alt = data.weather[0].description;
+
+          temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
+          descriptionElement.textContent = data.weather[0].description;
+        })
+        .catch(error => {
+          console.error("Error fetching weather:", error);
+          descriptionElement.textContent = "Unable to fetch weather";
+        });
+    }, () => {
+      descriptionElement.textContent = "Location access denied";
+    });
   } else {
-    locationElement.textContent = "Geolocation not supported";
+    descriptionElement.textContent = "Geolocation not supported";
   }
+}
 
-  function success(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        locationElement.textContent = data.name;
-        temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
-        descriptionElement.textContent = data.weather[0].description;
-
-        // Set weather icon
-        const iconCode = data.weather[0].icon;
-        iconElement.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-        iconElement.alt = data.weather[0].description;
-      })
-      .catch(() => {
-        locationElement.textContent = "Unable to get weather";
-      });
-  }
-
-  function error() {
-    locationElement.textContent = "Location access denied";
-  }
+// Change theme color
+themeSelector.addEventListener("change", () => {
+  const selectedTheme = themeSelector.value;
+  weatherWidget.className = `widget ${selectedTheme}`;
 });
+
+// Load weather on start
+getWeather();
