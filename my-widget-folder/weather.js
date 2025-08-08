@@ -5,6 +5,8 @@ const themeSelector = document.getElementById('themeSelector');
 const locationEl = document.getElementById('location');
 const temperatureEl = document.getElementById('temperature');
 const descriptionEl = document.getElementById('description');
+const iconCode = data.weather[0].icon;
+const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
 themeSelector.addEventListener('change', () => {
   widget.classList.remove('pink', 'sage', 'lavender', 'sky');
