@@ -1,104 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather Widget</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 10px;
-      background: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #themeSelector, #cityInput {
-      margin-bottom: 10px;
-      padding: 5px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .widget {
-      background: white;
-      border-radius: 15px;
-      padding: 15px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .widget img {
-      width: 50px;
-      height: 50px;
-    }
-    .widget p {
-      margin: 5px 0;
-    }
-    /* Theme colors */
-    .pink { border: 2px solid #f7b2d9; }
-    .sage { border: 2px solid #a3c4b6; }
-    .lavender { border: 2px solid #c6b3ff; }
-    .sky { border: 2px solid #a7d8f0; }
-  </style>
-</head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather Widget</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 10px;
-      background: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #themeSelector, #cityInput {
-      margin-bottom: 10px;
-      padding: 5px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .widget {
-      background: white;
-      border-radius: 15px;
-      padding: 15px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .widget img {
-      width: 50px;
-      height: 50px;
-    }
-    .widget p {
-      margin: 5px 0;
-    }
-    /* Theme colors */
-    .pink { border: 2px solid #f7b2d9; }
-    .sage { border: 2px solid #a3c4b6; }
-    .lavender { border: 2px solid #c6b3ff; }
-    .sky { border: 2px solid #a7d8f0; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pastel Weather Widget</title>
+  <link href="style.css" rel="stylesheet" />
+  <!-- Google Fonts Quicksand -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- Weather widget on top -->
+  <!-- Weather Widget -->
   <div id="weatherWidget" class="widget pink">
-    <img id="weatherIcon" src="" alt="Weather Icon" />
-    <p id="locationName"></p>
+    <img id="weatherIcon" src="https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif" alt="weather icon" />
+    <p id="locationName">loading...</p>
     <p id="temperature"></p>
     <p id="description"></p>
   </div>
 
-  <!-- Controls container BELOW the widget -->
+  <!-- Controls below widget -->
   <div class="controls">
     <select id="themeSelector" aria-label="Select widget theme color">
       <option value="pink" selected>Pink</option>
@@ -111,6 +31,5 @@
   </div>
 
   <script src="weather.js"></script>
-
 </body>
 </html>
