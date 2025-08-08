@@ -1,6 +1,4 @@
 const API_KEY = "8b38a4d3d6920110547bdaef3d73c0ba"; // Replace with your OpenWeather API key
-console.log('Weather data:', data);
-console.log('Icon code:', data.weather[0]?.icon);
 const widget = document.querySelector('.widget');
 const themeSelector = document.getElementById('themeSelector');
 const locationEl = document.getElementById('location');
@@ -26,8 +24,8 @@ function showWeather(position) {
     .then(data => {
       locationEl.textContent = data.name;
       temperatureEl.textContent = `${Math.round(data.main.temp)}°C`;
-      const iconCode = data.weather[0].icon;
-      const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+      const iconCode = data.weather?.[0]?.icon || "01d"; // fallback sunny icon
+const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
       descriptionEl.innerHTML = `<img src="${iconUrl}" alt="Weather Icon" style="vertical-align: middle; width: 40px; height: 40px; margin-right: 8px;" /> ${data.weather[0].description}`;
     })
     .catch(() => {
