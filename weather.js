@@ -7,7 +7,10 @@ const temperatureEl = document.getElementById('temperature');
 const descriptionEl = document.getElementById('description');
 
 themeSelector.addEventListener('change', () => {
-  widget.className = 'widget ' + themeSelector.value;
+  // Remove any of the pastel color classes first
+  widget.classList.remove('pink', 'sage', 'lavender', 'sky');
+  // Add the selected color class
+  widget.classList.add(themeSelector.value);
 });
 
 // Set default theme
