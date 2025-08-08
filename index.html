@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastel Weather Widget</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f8f8f8;
+      margin: 0;
+    }
+
+    .widget {
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      width: 220px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    /* Pastel themes */
+    .pink { background: #ffe4ec; }
+    .sage { background: #d6e5d0; }
+    .lavender { background: #e8e4f8; }
+    .sky { background: #d6ecff; }
+
+    .widget img {
+      width: 80px;
+      height: 80px;
+    }
+
+    select {
+      margin-top: 12px;
+      padding: 6px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="widget pink">
+    <h3 id="location">Loading location...</h3>
+    <img id="weatherIcon" src="" alt="Weather icon">
+    <p id="temperature"></p>
+    <p id="description"></p>
+    <select id="themeSelector">
+      <option value="pink">Pink</option>
+      <option value="sage">Sage</option>
+      <option value="lavender">Lavender</option>
+      <option value="sky">Sky</option>
+    </select>
+  </div>
+
+  <script src="weather.js"></script>
+</body>
+</html>
