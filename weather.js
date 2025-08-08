@@ -1,50 +1,43 @@
+const API_KEY = "8b38a4d3d6920110547bdaef3d73c0ba"; // Replace with your OpenWeather API key
+
+const widget = document.querySelector('.widget');
+const themeSelector = document.getElementById('themeSelector');
 const locationEl = document.getElementById('location');
 const temperatureEl = document.getElementById('temperature');
-const conditionEl = document.getElementById('condition');
-const errorEl = document.getElementById('error');
+const descriptionEl = document.getElementById('description');
 
-const API_KEY = '8b38a4d3d6920110547bdaef3d73c0ba';
+themeSelector.addEventListener('change', () => {
+  widget.className = 'widget ' + themeSelector.value;
+});
 
-function kelvinToCelsius(kelvin) {
-  return (kelvin - 273.15).toFixed(1);
+// Set default theme
+widget.classList.add('pink');
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showWeather, showError);
+} else {
+  locationEl.textContent = "Geolocation not supported";
 }
 
-function getWeather(lat, lon) {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${8b38a4d3d6920110547bdaef3d73c0ba}`)
-    .then(res => res.json())
+function showWeather(position) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${8b38a4d3d6920110547bdaef3d73c0ba}&units=metric`)
+    .then(response => response.json())
     .then(data => {
-      if(data.cod !== 200) {
-        throw new Error(data.message);
-      }
-      locationEl.textContent = `${data.name}, ${data.sys.country}`;
-      temperatureEl.textContent = `${kelvinToCelsius(data.main.temp)} °C`;
-      conditionEl.textContent = data.weather[0].description;
+      locationEl.textContent = data.name;
+      temperatureEl.textContent = `${Math.round(data.main.temp)}°C`;
+      descriptionEl.textContent = data.weather[0].description;
     })
-    .catch(err => {
-      errorEl.textContent = "Couldn't get weather: " + err.message;
-      locationEl.textContent = '';
-      temperatureEl.textContent = '';
-      conditionEl.textContent = '';
+    .catch(() => {
+      locationEl.textContent = "Couldn't get weather";
+      temperatureEl.textContent = "";
+      descriptionEl.textContent = "";
     });
 }
 
-function requestLocation() {
-  if (!navigator.geolocation) {
-    errorEl.textContent = 'Geolocation is not supported by your browser.';
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      errorEl.textContent = '';
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      getWeather(lat, lon);
-    },
-    () => {
-      errorEl.textContent = 'Permission denied. Please allow location access.';
-    }
-  );
+function showError() {
+  locationEl.textContent = "Couldn't get location";
+  temperatureEl.textContent = "";
+  descriptionEl.textContent = "";
 }
-
-requestLocation();
