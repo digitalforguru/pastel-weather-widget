@@ -1,87 +1,101 @@
-/* Body and page background */
+/* General styles */
 body {
-  font-family: 'Poppins', sans-serif; /* or your fave clean font */
-  background-color: #fff; /* white background */
+  font-family: 'Quicksand', sans-serif;
+  background-color: white;
   margin: 0;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
 }
 
 /* Widget styling */
 .widget {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
   width: 220px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   text-align: center;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  user-select: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Widget text default */
-.widget p,
-.widget #locationName {
-  margin: 5px 0;
-  font-weight: 600;
-  font-size: 1.1rem;
-  user-select: none;
-}
-
-/* Weather icon size */
 .widget img {
   width: 60px;
   height: 60px;
   margin-bottom: 10px;
 }
 
-/* Theme backgrounds */
-.pink {
-  background-color: #f8a5c2;
-  color: #722f44;
-}
-.sage {
-  background-color: #a3c9a8;
-  color: #3a4a32;
-}
-.lavender {
-  background-color: #c3aed6;
-  color: #4a3a64;
-}
-.sky {
-  background-color: #87ceeb;
-  color: #243447;
+#locationName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 5px 0;
+  text-transform: lowercase;
 }
 
-/* Controls container below widget */
+#temperature {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 5px 0;
+}
+
+#description {
+  font-style: italic;
+  font-weight: 400;
+  margin: 10px 0 0;
+  text-transform: capitalize;
+}
+
+/* Controls container */
 .controls {
-  margin: 30px auto 0;
+  margin-top: 80px;
   max-width: 220px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 15px;
+  width: 100%;
 }
 
-/* Controls style */
+/* Select and input styling */
 .controls select,
 .controls input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 12px;
   font-size: 1rem;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1.5px solid #ccc;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
   box-sizing: border-box;
+  cursor: pointer;
   transition: border-color 0.3s ease;
 }
 
-/* Controls focus style */
 .controls select:focus,
 .controls input:focus {
   outline: none;
-  border-color: #722f44; /* match pink accent as default */
-  box-shadow: 0 0 5px rgba(114, 47, 68, 0.5);
+  border-color: #b34a69;
+}
+
+/* Pastel background colors and text colors */
+
+.pink {
+  background-color: #f8b4d9;
+  color: #7a1646;
+}
+
+.sage {
+  background-color: #b8d8ba;
+  color: #3a4a32;
+}
+
+.lavender {
+  background-color: #cdb4db;
+  color: #4a3a64;
+}
+
+.sky {
+  background-color: #a2d2ff;
+  color: #243447;
 }
