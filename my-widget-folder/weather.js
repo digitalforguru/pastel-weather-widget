@@ -6,12 +6,16 @@ const descriptionElement = document.getElementById("description");
 const themeSelector = document.getElementById("themeSelector");
 const cityInput = document.getElementById("cityInput");
 
+// Cute cloud gif as placeholder icon
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
-const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba"; // Your OpenWeatherMap API key
+
+// Your OpenWeatherMap API key here
+const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
 function getWeather(city) {
   if (!city) return;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=imperial&appid=${apiKey}`;
 
   fetch(apiUrl)
     .then(response => {
@@ -26,23 +30,21 @@ function getWeather(city) {
       temperatureElement.textContent = `${Math.round(data.main.temp)}°F`;
       descriptionElement.textContent = data.weather[0].description;
     })
-    .catch(error => {
-      console.error("Error fetching weather:", error);
-      descriptionElement.textContent = "Unable to fetch weather";
-      temperatureElement.textContent = "";
-      locationElement.textContent = "";
+    .catch(() => {
       weatherIcon.src = "";
       weatherIcon.alt = "";
+      locationElement.textContent = "Unable to fetch weather";
+      temperatureElement.textContent = "";
+      descriptionElement.textContent = "";
     });
 }
 
-// Theme selector listener
+// Change theme on selection
 themeSelector.addEventListener("change", () => {
-  const selectedTheme = themeSelector.value;
-  weatherWidget.className = `widget ${selectedTheme}`;
+  weatherWidget.className = "widget " + themeSelector.value;
 });
 
-// City input listener: save city and fetch weather
+// When city input changes, save and fetch weather
 cityInput.addEventListener("change", () => {
   const city = cityInput.value.trim();
   if (city) {
@@ -51,11 +53,13 @@ cityInput.addEventListener("change", () => {
   }
 });
 
-// On page load, check saved city or use default
-const savedCity = localStorage.getItem("userCity");
-if (savedCity) {
-  cityInput.value = savedCity;
-  getWeather(savedCity);
-} else {
-  getWeather("Los Angeles"); // Default city if none saved
-}
+// On load: load saved city or default to LA
+window.addEventListener("DOMContentLoaded", () => {
+  const savedCity = localStorage.getItem("userCity");
+  if (savedCity) {
+    cityInput.value = savedCity;
+    getWeather(savedCity);
+  } else {
+    getWeather("Los Angeles");
+  }
+});
