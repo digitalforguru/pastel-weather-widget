@@ -46,3 +46,32 @@ body {
 .sage { background: #a3c9a8; }
 .lavender { background: #c3aed6; }
 .sky { background: #87ceeb; }
+
+/* ADD THIS AT THE END */
+
+#weatherWidget {
+  margin-top: 20px;
+  width: 220px;
+  text-align: center;
+}
+
+.controls {
+  margin: 100px auto 0; /* pushes controls down */
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.controls select,
+.controls input {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Quicksand', sans-serif; /* or your preferred font */
+  box-sizing: border-box;
+  cursor: pointer;
+}
