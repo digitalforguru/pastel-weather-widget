@@ -13,8 +13,7 @@ themeSelector.addEventListener('change', () => {
   widget.classList.add(themeSelector.value);
 });
 
-// Set default theme
-widget.classList.add('pink');
+
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(showWeather, showError);
