@@ -16,7 +16,6 @@
       height: 100vh;
       margin: 0;
     }
-    /* Theme selector outside widget */
     .theme-selector {
       margin-bottom: 15px;
     }
@@ -26,7 +25,6 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
-    /* Widget box */
     .widget {
       background: white;
       padding: 20px;
@@ -36,18 +34,22 @@
       transition: background 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    /* Color themes */
     .pink { background: #ffe6f0; }
     .sage { background: #e6f2e6; }
     .lavender { background: #f0e6ff; }
     .sky { background: #e6f0ff; }
-    /* Icon style */
     #weatherIcon {
       width: 70px;
       height: 70px;
       object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+    }
+    .location {
+      font-size: 0.85em;
+      color: #777;
+      margin-bottom: 6px;
+      text-transform: lowercase;
     }
     .temp {
       font-size: 1.5em;
@@ -76,7 +78,8 @@
   <!-- Weather Widget -->
   <div class="widget pink" id="weatherWidget">
     <img id="weatherIcon" alt="Weather Icon">
-    <div class="temp" id="temperature">--°C</div>
+    <div class="location" id="locationName">loading...</div>
+    <div class="temp" id="temperature">--°F</div>
     <div class="desc" id="description">Loading...</div>
   </div>
 
