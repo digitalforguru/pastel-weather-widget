@@ -9,6 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+  /* Global box-sizing */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   body {
     display: flex;
     justify-content: center;
@@ -24,6 +29,7 @@
     border-radius: 15px;
     padding: 20px;
     width: 220px;
+    max-width: 100%;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
     transition: background-color 0.3s ease;
     color: white;
@@ -72,7 +78,7 @@
 <body>
 
 <div class="widget pink">
-  <h2>Weather</h2>
+  <h2>weather</h2>
   <p id="location">Loading location...</p>
   <p id="temperature"></p>
   <p id="description"></p>
