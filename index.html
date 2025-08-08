@@ -1,70 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pastel Weather Widget</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: 'Quicksand', sans-serif;
-      background: #fdfdfd;
-      margin: 0;
-      height: 100vh;
-      justify-content: center;
-    }
-    .theme-controls {
-      margin-bottom: 15px;
-    }
-    select {
-      padding: 6px;
-      border-radius: 8px;
-      border: none;
-      font-size: 14px;
-      background: white;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-    .widget {
-      text-align: center;
-      padding: 20px;
-      border-radius: 15px;
-      width: 220px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      color: #333;
-      transition: background 0.3s;
-    }
-    .pink { background: #ffe4ec; }
-    .sage { background: #d6e5d0; }
-    .lavender { background: #e8e4f8; }
-    .sky { background: #d6ecff; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pastel Weather Widget</title>
 
-    img.weather-icon {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 8px;
-    }
-  </style>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #fdfdfd;
+    margin: 0;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .widget {
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px;
+    width: 220px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    color: white;
+  }
+
+  .pink { background-color: #f8b4d9; }
+  .sage { background-color: #b8d8ba; color: #3a4a32; }
+  .lavender { background-color: #cdb4db; color: #4a3a64; }
+  .sky { background-color: #a2d2ff; color: #243447; }
+
+  h2 {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
+
+  #location { font-size: 1.1rem; font-weight: 600; margin-bottom: 5px; }
+  #temperature { font-size: 2.8rem; font-weight: 700; margin-bottom: 5px; }
+  #description { font-style: italic; margin-bottom: 15px; text-transform: capitalize; }
+
+  select {
+    padding: 5px 8px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  #weatherIcon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+</style>
 </head>
 <body>
 
-  <div class="theme-controls">
-    <select id="themeSelector">
-      <option value="pink">Pink</option>
-      <option value="sage">Sage</option>
-      <option value="lavender">Lavender</option>
-      <option value="sky">Sky</option>
-    </select>
-  </div>
+<!-- Theme Selector Outside Widget -->
+<select id="themeSelector" aria-label="Select widget theme color">
+  <option value="pink">Pink</option>
+  <option value="sage">Sage</option>
+  <option value="lavender">Lavender</option>
+  <option value="sky">Sky Blue</option>
+</select>
 
-  <div class="widget pink">
-    <h3 id="location">Loading…</h3>
-    <img id="weatherIcon" class="weather-icon" src="" alt="Weather icon">
-    <p id="temperature"></p>
-    <p id="description"></p>
-  </div>
+<!-- Weather Widget -->
+<div class="widget pink">
+  <h2>Weather</h2>
+  <img id="weatherIcon" src="" alt="Weather Icon">
+  <p id="location">Loading location...</p>
+  <p id="temperature"></p>
+  <p id="description"></p>
+</div>
 
-  <script src="weather.js"></script>
+<script src="weather.js"></script>
 </body>
 </html>
