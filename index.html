@@ -1,168 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pastel Weather Widget</title>
-  <style>
-    :root {
-      --pastel-beige: #f7f1e8;
-      --pastel-green: #e3f1ec;
-      --pastel-pink: #fcddec;
-      --pastel-peach: #ffe8d6;
-      --pastel-blue: #dbefff;
-      --pastel-purple: #e9e4f0;
-      --background: var(--pastel-pink);
-      --accent-color: #b34a69;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pastel Weather Widget</title>
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--background);
-      color: var(--accent-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
-    }
+<!-- Google Font: Quicksand -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
-    label, select {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: var(--accent-color);
-    }
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #fdfdfd; /* neutral background */
+    margin: 0;
+  }
 
-    select {
-      padding: 8px 12px;
-      border-radius: 9999px;
-      border: none;
-      background-color: var(--pastel-pink);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+  .widget {
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px;
+    width: 220px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    color: white;
+    user-select: none;
+  }
 
-    select:hover {
-      background-color: #f9bbca;
-    }
+  .pink { background-color: #f8b4d9; }
+  .sage { background-color: #b8d8ba; color: #3a4a32; }
+  .lavender { background-color: #cdb4db; color: #4a3a64; }
+  .sky { background-color: #a2d2ff; color: #243447; }
 
-    #weather {
-      margin-top: 30px;
-      font-size: 1.5rem;
-      text-align: center;
-      max-width: 300px;
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-      color: #333;
-    }
+  h2 {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
 
-    #location {
-      font-weight: 700;
-      font-size: 1.7rem;
-      margin-bottom: 10px;
-    }
+  #location {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
 
-    #temperature {
-      font-size: 3rem;
-      font-weight: 700;
-      margin: 15px 0;
-    }
+  #temperature {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
 
-    #description {
-      font-style: italic;
-      text-transform: capitalize;
-    }
-  </style>
+  #description {
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+  }
+
+  select {
+    padding: 5px 8px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+  }
+</style>
 </head>
 <body>
 
-  <label for="color-select">Choose background color:</label>
-  <select id="color-select" aria-label="Select pastel background color">
-    <option value="pastel-beige">Beige</option>
-    <option value="pastel-green">Green</option>
-    <option value="pastel-pink" selected>Pink</option>
-    <option value="pastel-peach">Peach</option>
-    <option value="pastel-blue">Blue</option>
-    <option value="pastel-purple">Purple</option>
+<div class="widget pink">
+  <h2>Weather</h2>
+  <p id="location">Loading location...</p>
+  <p id="temperature"></p>
+  <p id="description"></p>
+  <select id="themeSelector" aria-label="Select widget theme color">
+    <option value="pink">Pink</option>
+    <option value="sage">Sage</option>
+    <option value="lavender">Lavender</option>
+    <option value="sky">Sky Blue</option>
   </select>
+</div>
 
-  <div id="weather" role="region" aria-live="polite" aria-atomic="true">
-    <div id="location">Loading location...</div>
-    <div id="temperature"></div>
-    <div id="description"></div>
-  </div>
-
-  <script>
-    // Background color selector
-    const colorSelect = document.getElementById('color-select');
-    function updateBackgroundColor() {
-      const color = colorSelect.value;
-      const root = document.documentElement;
-      const colorMap = {
-        'pastel-beige': 'var(--pastel-beige)',
-        'pastel-green': 'var(--pastel-green)',
-        'pastel-pink': 'var(--pastel-pink)',
-        'pastel-peach': 'var(--pastel-peach)',
-        'pastel-blue': 'var(--pastel-blue)',
-        'pastel-purple': 'var(--pastel-purple)'
-      };
-      root.style.setProperty('--background', colorMap[color]);
-    }
-    updateBackgroundColor();
-    colorSelect.addEventListener('change', updateBackgroundColor);
-
-    // Weather fetching
-    const locationElem = document.getElementById('location');
-    const temperatureElem = document.getElementById('temperature');
-    const descriptionElem = document.getElementById('description');
-
-    const API_KEY = '8b38a4d3d6920110547bdaef3d73c0ba'; // 👈 Replace this!
-
-    function fetchWeather(lat, lon) {
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          if (data.cod !== 200) {
-            locationElem.textContent = "Couldn't get weather :(";
-            temperatureElem.textContent = '';
-            descriptionElem.textContent = '';
-            return;
-          }
-          locationElem.textContent = `${data.name}, ${data.sys.country}`;
-          temperatureElem.textContent = `${Math.round(data.main.temp)}°C`;
-          descriptionElem.textContent = data.weather[0].description;
-        })
-        .catch(() => {
-          locationElem.textContent = "Couldn't get weather :(";
-          temperatureElem.textContent = '';
-          descriptionElem.textContent = '';
-        });
-    }
-
-    function getLocationAndWeather() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
-          () => {
-            locationElem.textContent = "Location permission denied.";
-            temperatureElem.textContent = '';
-            descriptionElem.textContent = '';
-          }
-        );
-      } else {
-        locationElem.textContent = "Geolocation not supported.";
-        temperatureElem.textContent = '';
-        descriptionElem.textContent = '';
-      }
-    }
-
-    getLocationAndWeather();
-  </script>
-
+<script src="weather.js"></script>
 </body>
 </html>
