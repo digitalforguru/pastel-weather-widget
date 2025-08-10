@@ -1,75 +1,94 @@
+/* Transparent background for Notion embed */
 body {
-  background: transparent;
-  margin: 0;
-  font-family: 'Arial', sans-serif;
+    background-color: transparent;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
 }
 
+/* Widget styles */
 .widget {
-  width: 100%;
-  max-width: 300px;
-  background-color: #d8bee5; /* default pink */
-  border-radius: 16px;
-  padding: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  box-sizing: border-box;
-  margin: 20px auto;
-  text-align: center;
-  position: relative;
+    width: 90%;
+    max-width: 300px;
+    background-color: #eed6c1; /* Default beige */
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-.weather-info img {
-  width: 80px;
-  height: 80px;
+/* Top bar layout */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.theme-selector {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.theme-main {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #d8bee5;
-  cursor: pointer;
-  border: 2px solid #fff;
-}
-
-.theme-options {
-  display: none;
-  flex-direction: column;
-  margin-top: 5px;
-  align-items: center;
-}
-
-.theme-selector.open .theme-options {
-  display: flex;
-}
-
+/* Theme button */
 .theme-circle {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  margin: 3px 0;
-  cursor: pointer;
-  border: 1px solid #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
 }
 
+/* Theme dropdown options */
+.theme-options {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.theme-option {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Location button */
 .location-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  margin-top: 10px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
 }
 
-#cityInput {
-  margin-top: 10px;
-  padding: 5px;
-  width: 80%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  text-align: center;
+/* Input styles */
+#city-input-container {
+    margin: 10px 0;
+}
+
+#city-input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 70%;
+}
+
+#save-city {
+    padding: 5px 8px;
+    border: none;
+    background-color: #ff88aa;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Weather details */
+#weather-icon {
+    width: 80px;
+    height: 80px;
+}
+
+#temperature {
+    font-size: 24px;
+    font-weight: bold;
 }
