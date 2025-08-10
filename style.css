@@ -39,8 +39,9 @@ body {
   top: 10px;
   left: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* change this from column to row */
   gap: 8px;
+  align-items: center; /* vertically center the buttons */
   z-index: 10;
 }
 
