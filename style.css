@@ -82,11 +82,20 @@ body {
 
 /* Theme options dropdown container */
 .theme-options {
-  margin-top: 6px;
+  position: absolute;
+  top: 45px; /* or adjust depending on where you want it */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 8px;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 6px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 5;
 }
+
 
 /* Hide by default */
 .hidden {
