@@ -3,11 +3,12 @@ const weatherIcon = document.getElementById("weatherIcon");
 const locationElement = document.getElementById("locationName");
 const temperatureElement = document.getElementById("temperature");
 const descriptionElement = document.getElementById("description");
-const themeSelector = document.getElementById("themeSelector");
 const cityInput = document.getElementById("cityInput");
 const locationBtn = document.getElementById("locationBtn");
+const themeToggle = document.getElementById("themeToggle");
+const themeOptions = document.getElementById("themeOptions");
+const themeCircles = document.querySelectorAll(".theme-circle");
 
-// Your custom icon mapping URLs here:
 const iconMap = {
   "Clear": "https://i.pinimg.com/originals/09/fb/e5/09fbe54e3fdbf459e490006c56f999f9.gif",
   "Clouds": "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif",
@@ -17,7 +18,6 @@ const iconMap = {
 };
 
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
-
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
 // Load saved city & theme on page load
@@ -32,14 +32,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const savedTheme = localStorage.getItem("userTheme");
   if (savedTheme) {
-    themeSelector.value = savedTheme;
-    weatherWidget.className = "widget " + savedTheme + " small-square";
+    weatherWidget.className = `widget ${savedTheme} small-square`;
   } else {
-    weatherWidget.className = "widget pink small-square";
+    weatherWidget.className = `widget pink small-square`;
   }
 });
 
-// Fetch and show weather
+// Fetch weather and update UI
 function getWeather(city) {
   if (!city) return;
 
@@ -69,23 +68,42 @@ function getWeather(city) {
     });
 }
 
-// Save theme on change
-themeSelector.addEventListener("change", () => {
-  const theme = themeSelector.value;
-  weatherWidget.className = "widget " + theme + " small-square";
-  localStorage.setItem("userTheme", theme);
-});
-
-// When city input changes, save & update weather
-cityInput.addEventListener("change", () => {
-  const city = cityInput.value.trim();
-  if (city) {
-    localStorage.setItem("userCity", city);
-    getWeather(city);
+// Show/hide city input on location icon button click
+locationBtn.addEventListener("click", () => {
+  cityInput.classList.toggle("hidden");
+  if (!cityInput.classList.contains("hidden")) {
+    cityInput.focus();
   }
 });
 
-// Location button toggles city input focus
-locationBtn.addEventListener("click", () => {
-  cityInput.focus();
+// Save and fetch weather on city input 'Enter' key press or losing focus
+cityInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    const city = cityInput.value.trim();
+    if (city) {
+      localStorage.setItem("userCity", city);
+      getWeather(city);
+      cityInput.classList.add("hidden");
+    }
+  }
+});
+
+cityInput.addEventListener("blur", () => {
+  cityInput.classList.add("hidden");
+});
+
+// Toggle theme dropdown on main theme circle button click
+themeToggle.addEventListener("click", () => {
+  themeOptions.classList.toggle("hidden");
+});
+
+// When a theme circle is clicked, update theme and save
+themeCircles.forEach(circle => {
+  circle.addEventListener("click", () => {
+    const theme = circle.getAttribute("data-theme");
+    weatherWidget.className = `widget ${theme} small-square`;
+    localStorage.setItem("userTheme", theme);
+    themeOptions.classList.add("hidden");
+  });
 });
