@@ -1,221 +1,161 @@
+/* Reset and base */
 body {
-  margin: 0;
   background: transparent;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Cedarville Cursive', cursive, 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: flex-start;
+  height: 100vh;
 }
 
+/* Widget container */
 .widget {
-  background: #eed6c1; /* default beige */
+  background: #ffe7f5; /* pink default */
   border-radius: 20px;
-  padding: 18px 20px 30px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  color: #5a4a3e;
-  text-align: center;
-  text-transform: lowercase;
-  user-select: none;
-  position: relative;
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  grid-template-rows: auto auto 1fr auto;
-  gap: 4px 15px;
-  align-items: center;
-  max-width: 260px;
-  width: 100%;
-  transition: all 0.3s ease;
-  font-weight: 300;
-  font-size: 13px;
-}
-
-.widget.mini {
-  max-width: 180px;
-  font-size: 11px;
-  padding: 12px 15px 20px;
-  grid-template-columns: 70px 1fr;
-  gap: 3px 10px;
-}
-
-.top-left-panel {
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  color: #5a3e5a;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 6px;
+  padding: 16px;
+  box-sizing: border-box;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  user-select: none;
 }
 
-.location {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #5a4a3e;
-  width: 100%;
-  text-align: center;
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  margin: 0 auto;
-  user-select: text;
+/* Size variations */
+.widget.small-square {
+  width: 220px;
+  height: 220px;
 }
 
-.theme-toggle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1.5px solid white;
-  background: #eed6c1;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.theme-toggle:hover {
-  box-shadow: 0 0 8px #eed6c1aa;
-}
-
-.theme-options {
-  margin-top: 8px;
+/* Controls row with buttons side by side */
+.controls-row {
   display: flex;
-  gap: 8px;
-  justify-content: center;
-  grid-column: 1 / 3;
-  grid-row: 3 / 4;
+  gap: 10px;
+  margin-bottom: 8px;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.color-circle {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1.5px solid white;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.color-circle:hover {
-  transform: scale(1.3);
-}
-
-.location-btn {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  width: 30px;
-  height: 30px;
+/* Location button */
+.icon-button {
   background: transparent;
   border: 1.5px solid white;
-  cursor: pointer;
-  padding: 0;
   border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
-  justify-self: center;
-  margin-bottom: 10px;
-}
-
-.location-btn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.location-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: #d0bba8;
-  pointer-events: none;
-}
-
-.city-input {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
-  margin: 0 auto 10px;
-  width: 80%;
-  font-size: 1rem;
-  padding: 6px 8px;
-  border-radius: 12px;
-  border: 2px solid #d8bee5;
-  font-family: 'Poppins', sans-serif;
-  outline: none;
-  color: #5a4a3e;
-  text-align: center;
-  transition: border-color 0.3s ease;
-  text-transform: lowercase;
-}
-
-.city-input:focus {
-  border-color: #f8e7fa;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.weather-icon {
-  grid-column: 2 / 3;
-  grid-row: 4 / 5;
-  margin: 0 auto 5px;
-  width: 55px;
-  height: 55px;
-}
-
-.temperature {
-  grid-column: 2 / 3;
-  grid-row: 5 / 6;
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 5px 0 2px;
-}
-
-.description {
-  grid-column: 2 / 3;
-  grid-row: 6 / 7;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 0.9rem;
-  text-transform: lowercase;
-  margin-bottom: 0;
-  color: #6b5b4a;
-}
-
-/* Theme backgrounds & text colors */
-.widget.default {
-  background: #eed6c1;
-  color: #5a4a3e;
-}
-.widget.pink {
-  background: #d8bee5;
   color: #5a3e5a;
 }
+
+.icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* SVG inside button inherits currentColor */
+.icon-button svg {
+  width: 26px;
+  height: 26px;
+  stroke: #5a3e5a;
+  fill: none;
+}
+
+/* Theme selector dropdown */
+.theme-select {
+  border-radius: 12px;
+  border: 1.5px solid white;
+  background: transparent;
+  color: #5a3e5a;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: 'Cedarville Cursive', cursive, 'Quicksand', sans-serif;
+}
+
+/* City input */
+.city-input {
+  margin: 8px 0 12px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  border: 1.5px solid white;
+  width: 100%;
+  font-family: 'Cedarville Cursive', cursive, 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: #5a3e5a;
+  background: #fff0f8;
+  box-sizing: border-box;
+  text-transform: lowercase;
+}
+
+/* Weather info area */
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+/* Weather icon */
+.weather-icon {
+  width: 60px;
+  height: 60px;
+  user-select: none;
+}
+
+/* Location text */
+.location {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Temperature */
+.temperature {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Description */
+.description {
+  font-style: italic;
+  font-size: 1rem;
+  text-transform: lowercase;
+  color: #7a5c7a;
+}
+
+/* Theme color backgrounds and text */
+
+.widget.default-beige {
+  background: #eed6c1;
+  color: #5a3e5a;
+}
+
+.widget.pink {
+  background: #ffe7f5;
+  color: #5a3e5a;
+}
+
 .widget.purple {
   background: #f8e7fa;
   color: #5a3e5a;
 }
+
 .widget.blue {
   background: #dceaf5;
-  color: #3a4a5a;
+  color: #375a7f;
 }
+
 .widget.green {
   background: #daece1;
-  color: #4a5a3a;
-}
-
-.size-toggle {
-  grid-column: 1 / 3;
-  grid-row: 7 / 8;
-  width: 80px;
-  margin: 10px auto 0;
-  padding: 6px 10px;
-  font-size: 12px;
-  font-family: 'Poppins', sans-serif;
-  border-radius: 12px;
-  border: none;
-  background: #5a4a3e;
-  color: white;
-  cursor: pointer;
-  text-transform: lowercase;
-  user-select: none;
-  transition: background-color 0.3s ease;
-}
-
-.size-toggle:hover {
-  background: #6b5b4a;
+  color: #3a5a3a;
 }
