@@ -3,32 +3,26 @@ const weatherIcon = document.getElementById("weatherIcon");
 const locationElement = document.getElementById("locationName");
 const temperatureElement = document.getElementById("temperature");
 const descriptionElement = document.getElementById("description");
-const themeToggle = document.getElementById("themeToggle");
-const themeOptions = document.getElementById("themeOptions");
+const themeSelector = document.getElementById("themeSelector");
 const cityInput = document.getElementById("cityInput");
-const locationBtn = document.getElementById("location-btn");
-const sizeToggle = document.getElementById("sizeToggle");
+const locationBtn = document.getElementById("locationBtn");
+
+// Your custom icon mapping URLs here:
+const iconMap = {
+  "Clear": "https://i.pinimg.com/originals/09/fb/e5/09fbe54e3fdbf459e490006c56f999f9.gif",
+  "Clouds": "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif",
+  "Rain": "https://i.pinimg.com/originals/2e/50/b8/2e50b8f6c94ecce01cbc30eb275fc6ea.gif",
+  "Snow": "https://i.pinimg.com/originals/6e/36/7c/6e367ce95ab109121d03f12ed7d250c8.gif",
+  "Thunderstorm": "https://i.pinimg.com/originals/86/5e/10/865e10e7bcc6a739e01598dfbe38e300.gif",
+};
+
+const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
-const iconMap = {
-  Clear: "https://i.pinimg.com/originals/09/fb/e5/09fbe54e3fdbf459e490006c56f999f9.gif",
-  Clouds: "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif",
-  Rain: "https://i.pinimg.com/originals/2e/50/b8/2e50b8f6c94ecce01cbc30eb275fc6ea.gif",
-  Snow: "https://i.pinimg.com/originals/6e/36/7c/6e367ce95ab109121d03f12ed7d250c8.gif",
-  Thunderstorm: "https://i.pinimg.com/originals/86/5e/10/865e10e7bcc6a739e01598dfbe38e300.gif",
-};
-
+// Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
   const savedCity = localStorage.getItem("userCity");
-  const savedTheme = localStorage.getItem("userTheme") || "default";
-  const savedSize = localStorage.getItem("widgetSize") || "mini";
-
-  weatherWidget.className = `widget ${savedTheme} ${savedSize}`;
-  themeToggle.style.background = getComputedStyle(weatherWidget).backgroundColor;
-  themeToggle.style.borderColor = "white";
-  themeOptions.classList.add("hidden");
-
   if (savedCity) {
     cityInput.value = savedCity;
     getWeather(savedCity);
@@ -36,25 +30,29 @@ window.addEventListener("DOMContentLoaded", () => {
     getWeather("Los Angeles");
   }
 
-  sizeToggle.textContent = savedSize;
+  const savedTheme = localStorage.getItem("userTheme");
+  if (savedTheme) {
+    themeSelector.value = savedTheme;
+    weatherWidget.className = "widget " + savedTheme + " small-square";
+  } else {
+    weatherWidget.className = "widget pink small-square";
+  }
 });
 
+// Fetch and show weather
 function getWeather(city) {
   if (!city) return;
 
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-    city
-  )}&units=imperial&appid=${apiKey}`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=imperial&appid=${apiKey}`;
 
   fetch(apiUrl)
-    .then((response) => {
+    .then(response => {
       if (!response.ok) throw new Error("City not found");
       return response.json();
     })
-    .then((data) => {
+    .then(data => {
       const mainWeather = data.weather[0].main;
-      const iconURL = iconMap[mainWeather] || iconMap["Clouds"];
-
+      const iconURL = iconMap[mainWeather] || cloudIconURL;
       weatherIcon.src = iconURL;
       weatherIcon.alt = data.weather[0].description;
 
@@ -71,45 +69,23 @@ function getWeather(city) {
     });
 }
 
-themeToggle.addEventListener("click", () => {
-  themeOptions.classList.toggle("hidden");
+// Save theme on change
+themeSelector.addEventListener("change", () => {
+  const theme = themeSelector.value;
+  weatherWidget.className = "widget " + theme + " small-square";
+  localStorage.setItem("userTheme", theme);
 });
 
-themeOptions.querySelectorAll(".color-circle").forEach((circle) => {
-  circle.addEventListener("click", () => {
-    const selectedTheme = circle.dataset.color;
-    weatherWidget.className = `widget ${selectedTheme} ${weatherWidget.classList.contains("mini") ? "mini" : "normal"}`;
-    themeToggle.style.background = circle.style.backgroundColor;
-    localStorage.setItem("userTheme", selectedTheme);
-    themeOptions.classList.add("hidden");
-  });
-});
-
-locationBtn.addEventListener("click", () => {
-  cityInput.classList.toggle("hidden");
-  if (!cityInput.classList.contains("hidden")) {
-    cityInput.focus();
-  }
-});
-
+// When city input changes, save & update weather
 cityInput.addEventListener("change", () => {
   const city = cityInput.value.trim();
   if (city) {
     localStorage.setItem("userCity", city);
     getWeather(city);
-    cityInput.classList.add("hidden");
   }
 });
 
-sizeToggle.addEventListener("click", () => {
-  if (weatherWidget.classList.contains("mini")) {
-    weatherWidget.classList.remove("mini");
-    weatherWidget.classList.add("normal");
-    sizeToggle.textContent = "normal";
-  } else {
-    weatherWidget.classList.remove("normal");
-    weatherWidget.classList.add("mini");
-    sizeToggle.textContent = "mini";
-  }
-  localStorage.setItem("widgetSize", sizeToggle.textContent);
+// Location button toggles city input focus
+locationBtn.addEventListener("click", () => {
+  cityInput.focus();
 });
