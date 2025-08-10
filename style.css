@@ -83,17 +83,17 @@ body {
 /* Theme options dropdown container */
 .theme-options {
   position: absolute;
-  top: 45px; /* or adjust depending on where you want it */
+  top: 50%;
   left: 50%;
-  transform: translateX(-45%); /* instead of -50% */
+  transform: translate(-50%, -50%);
   display: flex;
   gap: 8px;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 6px 8px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.85); /* semi-transparent */
+  padding: 8px 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 20;
 }
 
 
