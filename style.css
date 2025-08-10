@@ -1,177 +1,151 @@
+/* Reset and base */
 body {
+  margin: 0; padding: 10px;
   background: transparent;
   font-family: 'Quicksand', sans-serif;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   height: 100vh;
 }
 
-/* Widget Container */
+/* Widget */
 .widget {
-  background: #ffe7f5;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  color: #5a3e5a;
-  display: flex;
-  flex-direction: column;
-  padding: 14px;
+  background-color: #ffe7f5; /* default pink */
+  border-radius: 16px;
+  padding: 12px 15px;
+  width: 180px;
+  height: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  color: #000;
+  font-size: 0.8rem;
   text-transform: lowercase;
   user-select: none;
-  position: relative;
-  width: 220px;
-  height: 220px;
 }
+
+/* Theme colors */
+.widget.pink { background-color: #ffe7f5; color: #60355c; }
+.widget.beige { background-color: #eed6c1; color: #5d4c3a; }
+.widget.purple { background-color: #f8e7fa; color: #7b5279; }
+.widget.blue { background-color: #dceaf5; color: #4b5c74; }
+.widget.green { background-color: #daece1; color: #5b6c5a; }
 
 /* Top left controls container */
 .top-left-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-/* Location button */
-.icon-button {
-  background: transparent;
-  border: 1.5px solid white;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  padding: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #5a3e5a;
-  transition: background-color 0.3s ease;
-}
-
-.icon-button:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-.icon-button svg {
-  width: 20px;
-  height: 20px;
-  stroke: #5a3e5a;
-  fill: none;
-}
-
-/* Theme dropdown toggle button */
-.theme-toggle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1.5px solid white;
-  background-color: #5a3e5a;
-  cursor: pointer;
-  position: relative;
-  outline: none;
-}
-
-/* Add a small white circle inside for style */
-.theme-toggle::after {
-  content: '';
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: white;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Theme options container */
-.theme-options {
-  display: flex;
-  gap: 8px;
-  margin-left: 10px;
-}
-
-.theme-options.hidden {
-  display: none;
-}
-
-/* Each theme circle button */
-.theme-circle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1.5px solid white;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-/* Colors */
-.theme-circle.default-beige { background: #eed6c1; }
-.theme-circle.pink { background: #ffe7f5; }
-.theme-circle.purple { background: #f8e7fa; }
-.theme-circle.blue { background: #dceaf5; }
-.theme-circle.green { background: #daece1; }
-
-/* City input */
-.city-input {
-  margin-bottom: 12px;
-  padding: 6px 10px;
-  border-radius: 14px;
-  border: 1.5px solid white;
-  width: 100%;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1rem;
-  color: #5a3e5a;
-  background: #fff0f8;
-  box-sizing: border-box;
-  text-transform: lowercase;
-}
-
-/* Hidden by default */
-.hidden {
-  display: none;
-}
-
-/* Weather info container */
-.weather-info {
+  top: 10px;
+  left: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  flex-grow: 1;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* Buttons base */
+.btn {
+  cursor: pointer;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* Location button - solid white circle */
+.location-btn {
+  background-color: white;
+  width: 28px;
+  height: 28px;
+  border: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.location-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: black;
+  pointer-events: none; /* so clicking passes to div */
+}
+
+/* Theme toggle button - transparent circle with white border */
+.theme-toggle-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid white;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+/* Theme options dropdown container */
+.theme-options {
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* Hide by default */
+.hidden {
+  display: none !important;
+}
+
+/* Theme circle buttons (color options) */
+.theme-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.25s ease;
+}
+
+.theme-circle:hover {
+  border-color: #666;
 }
 
 /* Weather icon */
-.weather-icon {
-  width: 50px;
-  height: 50px;
-  user-select: none;
+#weatherIcon {
+  margin-top: 50px;
+  width: 70px;
+  height: 70px;
 }
 
-/* Location text */
-.location {
-  font-size: 1rem;
+/* Text styling */
+#locationName {
+  margin: 8px 0 0;
   font-weight: 600;
-  text-align: center;
-  margin: 0;
+  font-size: 1rem;
 }
 
-/* Temperature */
-.temperature {
-  font-size: 1.6rem;
+#temperature {
+  margin: 4px 0 0;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin: 0;
 }
 
-/* Description */
-.description {
-  font-style: italic;
-  font-size: 0.9rem;
-  color: #7a5c7a;
+#description {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
   text-transform: lowercase;
-  margin: 0;
+}
+
+/* City input styling */
+.city-input {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  width: 100px;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color: #333;
+  outline: none;
+  user-select: auto;
+  transition: opacity 0.25s ease;
+  z-index: 11;
 }
