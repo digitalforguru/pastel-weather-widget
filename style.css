@@ -1,7 +1,6 @@
-/* Reset and base */
 body {
   background: transparent;
-  font-family: 'Cedarville Cursive', cursive, 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,34 +9,29 @@ body {
   height: 100vh;
 }
 
-/* Widget container */
+/* Widget Container */
 .widget {
-  background: #ffe7f5; /* pink default */
+  background: #ffe7f5;
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.15);
   color: #5a3e5a;
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 14px;
   box-sizing: border-box;
-  font-variant: small-caps;
   text-transform: lowercase;
   user-select: none;
-}
-
-/* Size variations */
-.widget.small-square {
+  position: relative;
   width: 220px;
   height: 220px;
 }
 
-/* Controls row with buttons side by side */
-.controls-row {
+/* Top left controls container */
+.top-left-controls {
   display: flex;
   gap: 10px;
-  margin-bottom: 8px;
   align-items: center;
-  justify-content: flex-start;
+  margin-bottom: 6px;
 }
 
 /* Location button */
@@ -45,49 +39,90 @@ body {
   background: transparent;
   border: 1.5px solid white;
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
-  padding: 4px;
+  padding: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease;
   color: #5a3e5a;
+  transition: background-color 0.3s ease;
 }
 
 .icon-button:hover {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-/* SVG inside button inherits currentColor */
 .icon-button svg {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   stroke: #5a3e5a;
   fill: none;
 }
 
-/* Theme selector dropdown */
-.theme-select {
-  border-radius: 12px;
+/* Theme dropdown toggle button */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   border: 1.5px solid white;
-  background: transparent;
-  color: #5a3e5a;
-  padding: 6px 10px;
-  font-size: 0.9rem;
+  background-color: #5a3e5a;
   cursor: pointer;
-  font-family: 'Cedarville Cursive', cursive, 'Quicksand', sans-serif;
+  position: relative;
+  outline: none;
 }
+
+/* Add a small white circle inside for style */
+.theme-toggle::after {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Theme options container */
+.theme-options {
+  display: flex;
+  gap: 8px;
+  margin-left: 10px;
+}
+
+.theme-options.hidden {
+  display: none;
+}
+
+/* Each theme circle button */
+.theme-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Colors */
+.theme-circle.default-beige { background: #eed6c1; }
+.theme-circle.pink { background: #ffe7f5; }
+.theme-circle.purple { background: #f8e7fa; }
+.theme-circle.blue { background: #dceaf5; }
+.theme-circle.green { background: #daece1; }
 
 /* City input */
 .city-input {
-  margin: 8px 0 12px;
+  margin-bottom: 12px;
   padding: 6px 10px;
   border-radius: 14px;
   border: 1.5px solid white;
   width: 100%;
-  font-family: 'Cedarville Cursive', cursive, 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   color: #5a3e5a;
   background: #fff0f8;
@@ -95,7 +130,12 @@ body {
   text-transform: lowercase;
 }
 
-/* Weather info area */
+/* Hidden by default */
+.hidden {
+  display: none;
+}
+
+/* Weather info container */
 .weather-info {
   display: flex;
   flex-direction: column;
@@ -107,55 +147,31 @@ body {
 
 /* Weather icon */
 .weather-icon {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   user-select: none;
 }
 
 /* Location text */
 .location {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
+  margin: 0;
 }
 
 /* Temperature */
 .temperature {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
+  margin: 0;
 }
 
 /* Description */
 .description {
   font-style: italic;
-  font-size: 1rem;
-  text-transform: lowercase;
+  font-size: 0.9rem;
   color: #7a5c7a;
-}
-
-/* Theme color backgrounds and text */
-
-.widget.default-beige {
-  background: #eed6c1;
-  color: #5a3e5a;
-}
-
-.widget.pink {
-  background: #ffe7f5;
-  color: #5a3e5a;
-}
-
-.widget.purple {
-  background: #f8e7fa;
-  color: #5a3e5a;
-}
-
-.widget.blue {
-  background: #dceaf5;
-  color: #375a7f;
-}
-
-.widget.green {
-  background: #daece1;
-  color: #3a5a3a;
+  text-transform: lowercase;
+  margin: 0;
 }
