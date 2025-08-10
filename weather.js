@@ -7,6 +7,7 @@ const themeToggle = document.getElementById("themeToggle");
 const themeOptions = document.getElementById("themeOptions");
 const cityInput = document.getElementById("cityInput");
 const locationBtn = document.getElementById("location-btn");
+const sizeToggle = document.getElementById("sizeToggle");
 
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
@@ -18,15 +19,14 @@ const iconMap = {
   Thunderstorm: "https://i.pinimg.com/originals/86/5e/10/865e10e7bcc6a739e01598dfbe38e300.gif",
 };
 
-// Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
   const savedCity = localStorage.getItem("userCity");
   const savedTheme = localStorage.getItem("userTheme") || "default";
+  const savedSize = localStorage.getItem("widgetSize") || "mini";
 
-  weatherWidget.className = "widget " + savedTheme;
+  weatherWidget.className = `widget ${savedTheme} ${savedSize}`;
   themeToggle.style.background = getComputedStyle(weatherWidget).backgroundColor;
   themeToggle.style.borderColor = "white";
-
   themeOptions.classList.add("hidden");
 
   if (savedCity) {
@@ -35,9 +35,10 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     getWeather("Los Angeles");
   }
+
+  sizeToggle.textContent = savedSize;
 });
 
-// Fetch weather data
 function getWeather(city) {
   if (!city) return;
 
@@ -70,23 +71,20 @@ function getWeather(city) {
     });
 }
 
-// Toggle theme options dropdown
 themeToggle.addEventListener("click", () => {
   themeOptions.classList.toggle("hidden");
 });
 
-// Theme selection handler
 themeOptions.querySelectorAll(".color-circle").forEach((circle) => {
   circle.addEventListener("click", () => {
     const selectedTheme = circle.dataset.color;
-    weatherWidget.className = "widget " + selectedTheme;
+    weatherWidget.className = `widget ${selectedTheme} ${weatherWidget.classList.contains("mini") ? "mini" : "normal"}`;
     themeToggle.style.background = circle.style.backgroundColor;
     localStorage.setItem("userTheme", selectedTheme);
     themeOptions.classList.add("hidden");
   });
 });
 
-// Toggle city input on location icon click
 locationBtn.addEventListener("click", () => {
   cityInput.classList.toggle("hidden");
   if (!cityInput.classList.contains("hidden")) {
@@ -94,7 +92,6 @@ locationBtn.addEventListener("click", () => {
   }
 });
 
-// On city input change, save & fetch weather, then hide input
 cityInput.addEventListener("change", () => {
   const city = cityInput.value.trim();
   if (city) {
@@ -102,4 +99,17 @@ cityInput.addEventListener("change", () => {
     getWeather(city);
     cityInput.classList.add("hidden");
   }
+});
+
+sizeToggle.addEventListener("click", () => {
+  if (weatherWidget.classList.contains("mini")) {
+    weatherWidget.classList.remove("mini");
+    weatherWidget.classList.add("normal");
+    sizeToggle.textContent = "normal";
+  } else {
+    weatherWidget.classList.remove("normal");
+    weatherWidget.classList.add("mini");
+    sizeToggle.textContent = "mini";
+  }
+  localStorage.setItem("widgetSize", sizeToggle.textContent);
 });
