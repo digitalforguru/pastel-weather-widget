@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cute Weather Widget</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="weather.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather widget</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="widget" id="weatherWidget">
-    <div class="theme-selector">
-      <div class="theme-main" id="themeMain"></div>
-      <div class="theme-options" id="themeOptions">
-        <div class="theme-circle" data-color="#eed6c1"></div>
-        <div class="theme-circle" data-color="#d8bee5"></div>
-        <div class="theme-circle" data-color="#f8e7fa"></div>
-        <div class="theme-circle" data-color="#dceaf5"></div>
-        <div class="theme-circle" data-color="#daece1"></div>
-      </div>
+    <div class="widget">
+        <div class="top-bar">
+            <button id="theme-btn" class="theme-circle"></button>
+            <div id="theme-options" class="theme-options hidden">
+                <div class="theme-option" data-color="#eed6c1"></div>
+                <div class="theme-option" data-color="#d8bee5"></div>
+                <div class="theme-option" data-color="#f8e7fa"></div>
+                <div class="theme-option" data-color="#dceaf5"></div>
+                <div class="theme-option" data-color="#daece1"></div>
+            </div>
+            <button id="location-btn" class="location-btn">📍</button>
+        </div>
+
+        <div id="city-input-container" class="hidden">
+            <input type="text" id="city-input" placeholder="Type your city...">
+            <button id="save-city">Save</button>
+        </div>
+
+        <div id="weather">
+            <h2 id="city-name"></h2>
+            <img id="weather-icon" alt="Weather Icon">
+            <p id="temperature"></p>
+            <p id="description"></p>
+        </div>
     </div>
 
-    <div class="weather-info">
-      <h2 id="cityName">Loading...</h2>
-      <img id="weatherIcon" alt="Weather Icon">
-      <p id="temperature"></p>
-      <p id="description"></p>
-    </div>
-
-    <button id="cityButton" class="location-btn">📍</button>
-    <input type="text" id="cityInput" placeholder="Type your city..." style="display:none;">
-  </div>
+    <script src="weather.js"></script>
 </body>
 </html>
