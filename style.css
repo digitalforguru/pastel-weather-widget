@@ -85,7 +85,7 @@ body {
   position: absolute;
   top: 45px; /* or adjust depending on where you want it */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-45%); /* instead of -50% */
   display: flex;
   gap: 8px;
   justify-content: center;
@@ -119,7 +119,7 @@ body {
   position: absolute;
   top: 55%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
   display: flex;
   flex-direction: column;
   align-items: center;
