@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini Square Weather Widget</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>weather widget</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="weatherWidget" class="widget pink small-square">
-    <div class="controls-row">
+
+    <div class="top-left-controls">
       <button id="locationBtn" aria-label="Set location" title="Set location" class="icon-button" type="button">
-        <!-- Your SVG icon inline -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <!-- SVG icon here -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="24" height="24" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
           <g transform="translate(1.4 1.4) scale(2.81)">
             <path d="M45 90c-1.062 0-2.043-.561-2.583-1.475l-4.471-7.563c-9.222-15.591-17.933-30.317-20.893-36.258-2.086-4.277-3.138-8.852-3.138-13.62C13.916 13.944 27.86 0 45 0c17.141 0 31.085 13.944 31.085 31.084 0 4.764-1.051 9.339-3.124 13.596-0.021 0.042-0.042 0.083-0.063 0.124-3.007 6.005-11.672 20.654-20.843 36.159l-4.472 7.563C47.044 89.439 46.062 90 45 90zM45 6C31.168 6 19.916 17.253 19.916 31.084c0 3.848 0.847 7.539 2.518 10.969 2.852 5.721 11.909 21.033 20.667 35.839L45 81.104l1.89-3.196c8.763-14.813 17.823-30.131 20.687-35.879 0.012-0.022 0.023-0.045 0.035-0.067 1.642-3.406 2.474-7.065 2.474-10.877C70.085 17.253 58.832 6 45 6z"/>
             <path d="M45 44.597c-8.076 0-14.646-6.57-14.646-14.646S36.924 15.306 45 15.306c8.075 0 14.646 6.57 14.646 14.646S53.075 44.597 45 44.597zM45 21.306c-4.767 0-8.646 3.878-8.646 8.646s3.878 8.646 8.646 8.646c4.768 0 8.646-3.878 8.646-8.646S49.768 21.306 45 21.306z"/>
@@ -20,16 +21,19 @@
         </svg>
       </button>
 
-      <select id="themeSelector" aria-label="Select widget theme color" title="Change color theme" class="theme-select">
-        <option value="default-beige" selected>Beige</option>
-        <option value="pink">Pink</option>
-        <option value="purple">Purple</option>
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-      </select>
+      <div class="theme-dropdown">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme options"></button>
+        <div id="themeOptions" class="theme-options hidden">
+          <button class="theme-circle default-beige" data-theme="default-beige" title="Beige"></button>
+          <button class="theme-circle pink" data-theme="pink" title="Pink"></button>
+          <button class="theme-circle purple" data-theme="purple" title="Purple"></button>
+          <button class="theme-circle blue" data-theme="blue" title="Blue"></button>
+          <button class="theme-circle green" data-theme="green" title="Green"></button>
+        </div>
+      </div>
     </div>
 
-    <input type="text" id="cityInput" placeholder="Type your city" class="city-input" aria-label="Type your city" />
+    <input type="text" id="cityInput" placeholder="type your city" aria-label="Type your city" class="city-input hidden" />
 
     <div class="weather-info">
       <img id="weatherIcon" src="" alt="Weather Icon" class="weather-icon" />
@@ -40,8 +44,5 @@
   </div>
 
   <script src="weather.js"></script>
-</body>
-</html>
-<script src="weather.js"></script>
 </body>
 </html>
