@@ -20,9 +20,20 @@ const iconMap = {
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
+function getParams() {
+  return new URLSearchParams(window.location.search);
+}
+
 // Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
-  const savedCity = localStorage.getItem("userCity");
+  const params = getParams();
+
+  const urlCity = params.get("city");
+  const urlTheme = params.get("theme");
+
+  const savedCity = urlCity || localStorage.getItem("userCity");
+  const savedTheme = urlTheme || localStorage.getItem("userTheme");
+
   if (savedCity) {
     cityInput.value = savedCity;
     getWeather(savedCity);
@@ -30,7 +41,6 @@ window.addEventListener("DOMContentLoaded", () => {
     getWeather("Los Angeles");
   }
 
-  const savedTheme = localStorage.getItem("userTheme");
   if (savedTheme) {
     weatherWidget.className = `widget ${savedTheme} small-square`;
   } else {
@@ -82,10 +92,15 @@ cityInput.addEventListener("keydown", (e) => {
     e.preventDefault();
     const city = cityInput.value.trim();
     if (city) {
-      localStorage.setItem("userCity", city);
-      getWeather(city);
-      cityInput.classList.add("hidden");
-    }
+  localStorage.setItem("userCity", city);
+
+  const params = getParams();
+  params.set("city", city);
+  window.history.replaceState({}, "", `?${params.toString()}`);
+
+  getWeather(city);
+  cityInput.classList.add("hidden");
+}
   }
 });
 
@@ -102,8 +117,14 @@ themeToggle.addEventListener("click", () => {
 themeCircles.forEach(circle => {
   circle.addEventListener("click", () => {
     const theme = circle.getAttribute("data-theme");
+
     weatherWidget.className = `widget ${theme} small-square`;
     localStorage.setItem("userTheme", theme);
+
+    const params = getParams();
+    params.set("theme", theme);
+    window.history.replaceState({}, "", `?${params.toString()}`);
+
     themeOptions.classList.add("hidden");
   });
 });
