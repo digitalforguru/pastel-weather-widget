@@ -50,10 +50,45 @@ function copyWidgetLink() {
   }
 
   // 🌸 hide button after copying (ONLY in builder mode)
-  if (!isEmbed && copyLinkBtn) {
-    copyLinkBtn.style.display = "none";
+ 
+locationBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  const isHidden = locationPopup.classList.contains("hidden");
+
+  if (isHidden) {
+    locationPopup.classList.remove("hidden");
+    cityInput.focus();
+  } else {
+    locationPopup.classList.add("hidden");
   }
-}
+});
+
+cityInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+
+    const city = cityInput.value.trim();
+
+    if (city) {
+      localStorage.setItem("userCity", city);
+      getWeather(city);
+
+      locationPopup.classList.add("hidden");
+    }
+  }
+});
+cityInput.addEventListener("blur", () => {
+  locationPopup.classList.add("hidden");
+});
+document.addEventListener("click", (e) => {
+  const isClickInsidePopup = locationPopup?.contains(e.target);
+  const isClickLocationBtn = locationBtn.contains(e.target);
+
+  if (!isClickInsidePopup && !isClickLocationBtn) {
+    locationPopup.classList.add("hidden");
+  }
+});
 
 // Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
@@ -109,49 +144,16 @@ function getWeather(city) {
     });
 }
 
+if (!isEmbed && copyLinkBtn) {
+    copyLinkBtn.style.display = "none";
+  }
+}
+
 if (copyLinkBtn) {
   copyLinkBtn.addEventListener("click", copyWidgetLink);
 }
 
 // Show/hide city input on location icon button click
-locationBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-
-  const isHidden = locationPopup.classList.contains("hidden");
-
-  if (isHidden) {
-    locationPopup.classList.remove("hidden");
-    cityInput.focus();
-  } else {
-    locationPopup.classList.add("hidden");
-  }
-});
-
-cityInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-
-    const city = cityInput.value.trim();
-
-    if (city) {
-      localStorage.setItem("userCity", city);
-      getWeather(city);
-
-      locationPopup.classList.add("hidden");
-    }
-  }
-});
-cityInput.addEventListener("blur", () => {
-  locationPopup.classList.add("hidden");
-});
-document.addEventListener("click", (e) => {
-  const isClickInsidePopup = locationPopup?.contains(e.target);
-  const isClickLocationBtn = locationBtn.contains(e.target);
-
-  if (!isClickInsidePopup && !isClickLocationBtn) {
-    locationPopup.classList.add("hidden");
-  }
-});
 
 // Toggle theme dropdown on main theme circle button click
 themeToggle.addEventListener("click", () => {
