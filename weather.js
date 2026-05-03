@@ -20,10 +20,19 @@ const iconMap = {
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
-function getParams() {
-  return new URLSearchParams(window.location.search);
+function buildWidgetURL(city, theme) {
+  const base = window.location.origin + window.location.pathname;
+  return `${base}?city=${encodeURIComponent(city)}&theme=${theme}`;
 }
+function copyWidgetLink() {
+  const city = localStorage.getItem("userCity") || "Los Angeles";
+  const theme = localStorage.getItem("userTheme") || "pink";
 
+  const url = buildWidgetURL(city, theme);
+
+  navigator.clipboard.writeText(url);
+  alert("Widget link copied! Paste this into Notion embed 🌸");
+}
 // Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
   const params = getParams();
@@ -93,6 +102,7 @@ cityInput.addEventListener("keydown", (e) => {
     const city = cityInput.value.trim();
     if (city) {
   localStorage.setItem("userCity", city);
+getWeather(city);
 
   const params = getParams();
   params.set("city", city);
@@ -120,6 +130,7 @@ themeCircles.forEach(circle => {
 
     weatherWidget.className = `widget ${theme} small-square`;
     localStorage.setItem("userTheme", theme);
+weatherWidget.className = `widget ${theme} small-square`;
 
     const params = getParams();
     params.set("theme", theme);
