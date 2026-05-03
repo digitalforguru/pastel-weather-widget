@@ -45,6 +45,7 @@ body {
   user-select: none;
 
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  theme-color: #ffffff;
 }
 .widget:hover {
   transform: translateY(-2px) scale(1.01);
@@ -104,8 +105,12 @@ body {
   width: 18px;
   height: 18px;
   border: 2px solid white;
-  background-color: transparent;
+
+  background-color: var(--theme-color);
+
   box-sizing: border-box;
+
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Theme options dropdown container */
