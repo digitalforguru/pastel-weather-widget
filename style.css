@@ -72,8 +72,8 @@ body {
 
 /* Theme toggle button - transparent circle with white border */
 .theme-toggle-btn {
-  width: 28px;
-  height: 28px;
+  width: 18px;
+  height: 18px;
   border: 2px solid white;
   background-color: transparent;
   box-sizing: border-box;
