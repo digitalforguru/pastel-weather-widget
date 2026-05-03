@@ -128,12 +128,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = urlTheme || localStorage.getItem("userTheme");
   const savedFont = localStorage.getItem("userFont");
 
-  if (savedFont) {
-  weatherWidget.classList.add(`font-${savedFont}`);
-  } else {
-  weatherWidget.classList.add("font-default");
-  }
-
   if (savedCity) {
     cityInput.value = savedCity;
     getWeather(savedCity);
@@ -141,11 +135,18 @@ window.addEventListener("DOMContentLoaded", () => {
     getWeather("Los Angeles");
   }
 
-  if (savedTheme) {
-    weatherWidget.className = `widget ${savedTheme} small-square`;
-  } else {
-    weatherWidget.className = `widget pink small-square`;
-  }
+ if (savedTheme) {
+  weatherWidget.className = `widget ${savedTheme} small-square`;
+} else {
+  weatherWidget.className = `widget pink small-square`;
+}
+
+// apply font AFTER theme so it doesn't get wiped
+if (savedFont) {
+  weatherWidget.classList.add(`font-${savedFont}`);
+} else {
+  weatherWidget.classList.add("font-default");
+}
 });
 
 
@@ -196,11 +197,7 @@ themeCircles.forEach(circle => {
     
     themeOptions.classList.add("hidden");
   });
-  if (savedFont) {
-  weatherWidget.classList.add(`font-${savedFont}`);
-} else {
-  weatherWidget.classList.add("font-default");
-}
+  
 document.addEventListener("click", (e) => {
   const clickedInsideFont = fontOptions.contains(e.target);
   const clickedFontBtn = fontToggle.contains(e.target);
