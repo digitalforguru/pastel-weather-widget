@@ -60,6 +60,10 @@ body {
 .widget.blue { background-color: #ddebf1; color: #4b5c74; }
 .widget.green { background-color: #ddedea; color: #5b6c5a; }
 
+.hidden {
+  display: none !important;
+}
+
 .usage-tip {
   font-size: 12px;
   line-height: 1.4;
