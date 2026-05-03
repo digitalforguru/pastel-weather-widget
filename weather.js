@@ -114,11 +114,16 @@ if (copyLinkBtn) {
 }
 
 // Show/hide city input on location icon button click
-locationBtn.addEventListener("click", () => {
-  locationPopup.classList.toggle("hidden");
+locationBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
 
-  if (!locationPopup.classList.contains("hidden")) {
+  const isHidden = locationPopup.classList.contains("hidden");
+
+  if (isHidden) {
+    locationPopup.classList.remove("hidden");
     cityInput.focus();
+  } else {
+    locationPopup.classList.add("hidden");
   }
 });
 
