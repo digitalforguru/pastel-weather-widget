@@ -6,29 +6,19 @@
   <title>DigitalGuru's Weather Widget</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
   <body>
 
   <!-- 🌸 BUILDER MODE ONLY -->
   <div class="builder-ui">
 
-    <!-- Top Controls -->
-    <div class="top-left-controls">
-      <div id="locationBtn" class="btn location-btn" title="type location">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-    <path d="M128 0C93 0 64 29 64 64c0 46 64 192 64 192s64-146 64-192C192 29 163 0 128 0zm0 88a24 24 0 1 1 0-48 24 24 0 0 1 0 48z"/>
-  </svg>
-      <div id="themeToggle" class="btn theme-toggle-btn"></div>
-    </div>
-
     <!-- Theme Options -->
     <div id="themeOptions" class="theme-options hidden">
-  <div class="themes-row">
-    <div class="theme-circle" data-theme="pink"></div>
-    <div class="theme-circle" data-theme="beige"></div>
-    <div class="theme-circle" data-theme="blue"></div>
-    <div class="theme-circle" data-theme="green"></div>
-  </div>
+
+  <div class="theme-circle pink" data-theme="pink"></div>
+  <div class="theme-circle beige" data-theme="beige"></div>
+  <div class="theme-circle blue" data-theme="blue"></div>
+  <div class="theme-circle green" data-theme="green"></div>
+
 </div>
 
     <!-- City Input -->
@@ -39,6 +29,20 @@
       welcome to your Notion widget by digitalguru!
       this widget will only work when you set up your location + theme on this page. click to customize, then copy your embed link, paste, and enjoy your weather widget! ────୨ৎ──── 
     </div>
+
+    <div class="top-left-controls">
+
+  <!-- Location -->
+  <div id="locationBtn" class="btn location-btn" title="type location">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <path d="M128 0C93 0 64 29 64 64c0 46 64 192 64 192s64-146 64-192C192 29 163 0 128 0zm0 88a24 24 0 1 1 0-48 24 24 0 0 1 0 48z"/>
+    </svg>
+  </div>
+
+  <!-- Theme -->
+  <div id="themeToggle" class="btn theme-toggle-btn" title="select theme"></div>
+
+</div>
 
     <!-- Copy Button -->
     <div class="setup-area">
