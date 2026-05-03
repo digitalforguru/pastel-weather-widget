@@ -9,6 +9,8 @@ const themeToggle = document.getElementById("themeToggle");
 const themeOptions = document.getElementById("themeOptions");
 const themeCircles = document.querySelectorAll(".theme-circle");
 const copyLinkBtn = document.getElementById("copyLinkBtn");
+const params = new URLSearchParams(window.location.search);
+const isEmbed = params.get("embed") === "true";
 
 const iconMap = {
   "Clear": "https://i.pinimg.com/originals/09/fb/e5/09fbe54e3fdbf459e490006c56f999f9.gif",
@@ -20,13 +22,14 @@ const iconMap = {
 
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
-function getParams() {
-  return new URLSearchParams(window.location.search);
-}
 
+if (isEmbed) {
+  const copyArea = document.querySelector(".setup-area");
+  if (copyArea) copyArea.style.display = "none";
+} 
 function buildWidgetURL(city, theme) {
   const base = window.location.origin + window.location.pathname;
-  return `${base}?city=${encodeURIComponent(city)}&theme=${theme}`;
+  return `${base}?city=${encodeURIComponent(city)}&theme=${theme}&embed=true`;
 }
 function copyWidgetLink() {
   const city = localStorage.getItem("userCity") || "Los Angeles";
@@ -45,6 +48,10 @@ function copyWidgetLink() {
 
   // 🌸 hide button after copying
   if (copyLinkBtn) {
+  // only allow button in builder mode
+  if (!isEmbed) {
+    copyLinkBtn.addEventListener("click", copyWidgetLink);
+  } else {
     copyLinkBtn.style.display = "none";
   }
 }
