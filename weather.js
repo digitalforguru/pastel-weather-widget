@@ -32,16 +32,18 @@ if (isEmbed) {
   if (builderUI) builderUI.style.display = "none";
 }
 
-function buildWidgetURL(city, theme) {
+function buildWidgetURL(city, theme, font) {
   const base = window.location.origin + window.location.pathname;
-  return `${base}?city=${encodeURIComponent(city)}&theme=${theme}&embed=true`;
+
+  return `${base}?city=${encodeURIComponent(city)}&theme=${theme}&font=${font}&embed=true`;
 }
 
 function copyWidgetLink() {
   const city = localStorage.getItem("userCity") || "Los Angeles";
   const theme = localStorage.getItem("userTheme") || "pink";
+  const font = localStorage.getItem("userFont") || "default";
 
-  const url = buildWidgetURL(city, theme);
+  const url = buildWidgetURL(city, theme, font);
 
   navigator.clipboard.writeText(url);
 
@@ -120,6 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const urlCity = params.get("city");
   const urlTheme = params.get("theme");
+  const urlFont = params.get("font");
 
   const savedCity = urlCity || localStorage.getItem("userCity");
   const savedTheme = urlTheme || localStorage.getItem("userTheme");
@@ -193,6 +196,11 @@ themeCircles.forEach(circle => {
     
     themeOptions.classList.add("hidden");
   });
+  if (savedFont) {
+  weatherWidget.classList.add(`font-${savedFont}`);
+} else {
+  weatherWidget.classList.add("font-default");
+}
 document.addEventListener("click", (e) => {
   const clickedInsideFont = fontOptions.contains(e.target);
   const clickedFontBtn = fontToggle.contains(e.target);
