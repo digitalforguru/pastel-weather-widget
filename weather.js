@@ -68,14 +68,27 @@ fontChoices.forEach(option => {
   option.addEventListener("click", () => {
     const font = option.getAttribute("data-font");
 
-    weatherWidget.classList.remove("font-default", "font-serif", "font-mono");
-    weatherWidget.classList.add(`font-${font}`);
-
     localStorage.setItem("userFont", font);
+
+    applyFont(font);
 
     fontOptions.classList.add("hidden");
   });
 });
+
+function applyFont(font) {
+  let fontFamily = "";
+
+  if (font === "serif") {
+    fontFamily = "Georgia, serif";
+  } else if (font === "mono") {
+    fontFamily = "ui-monospace, SFMono-Regular, Menlo, monospace";
+  } else {
+    fontFamily = "'Satoshi', sans-serif";
+  }
+
+  weatherWidget.style.fontFamily = fontFamily;
+}
 
 
 locationBtn.addEventListener("click", (e) => {
@@ -126,7 +139,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const savedCity = urlCity || localStorage.getItem("userCity");
   const savedTheme = urlTheme || localStorage.getItem("userTheme");
-  const savedFont = localStorage.getItem("userFont");
+  const savedFont = urlFont || localStorage.getItem("userFont");
 
   if (savedCity) {
     cityInput.value = savedCity;
@@ -143,9 +156,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // apply font AFTER theme so it doesn't get wiped
 if (savedFont) {
-  weatherWidget.classList.add(`font-${savedFont}`);
+  applyFont(savedFont);
 } else {
-  weatherWidget.classList.add("font-default");
+  applyFont("default");
 }
 });
 
