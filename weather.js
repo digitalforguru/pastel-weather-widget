@@ -35,7 +35,18 @@ function copyWidgetLink() {
   const url = buildWidgetURL(city, theme);
 
   navigator.clipboard.writeText(url);
-  alert("Widget link copied! Paste this into Notion embed 🌸");
+
+  const message = document.getElementById("copyMessage");
+
+  if (message) {
+    message.classList.remove("hidden");
+    message.classList.add("show");
+  }
+
+  // 🌸 hide button after copying
+  if (copyLinkBtn) {
+    copyLinkBtn.style.display = "none";
+  }
 }
 // Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
