@@ -8,6 +8,7 @@ const locationBtn = document.getElementById("locationBtn");
 const themeToggle = document.getElementById("themeToggle");
 const themeOptions = document.getElementById("themeOptions");
 const themeCircles = document.querySelectorAll(".theme-circle");
+const copyLinkBtn = document.getElementById("copyLinkBtn");
 
 const iconMap = {
   "Clear": "https://i.pinimg.com/originals/09/fb/e5/09fbe54e3fdbf459e490006c56f999f9.gif",
@@ -19,6 +20,9 @@ const iconMap = {
 
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
+function getParams() {
+  return new URLSearchParams(window.location.search);
+}
 
 function buildWidgetURL(city, theme) {
   const base = window.location.origin + window.location.pathname;
@@ -87,6 +91,10 @@ function getWeather(city) {
     });
 }
 
+if (copyLinkBtn) {
+  copyLinkBtn.addEventListener("click", copyWidgetLink);
+}
+
 // Show/hide city input on location icon button click
 locationBtn.addEventListener("click", () => {
   cityInput.classList.toggle("hidden");
@@ -103,11 +111,8 @@ cityInput.addEventListener("keydown", (e) => {
     if (city) {
   localStorage.setItem("userCity", city);
 getWeather(city);
-
-  const params = getParams();
-  params.set("city", city);
-  window.history.replaceState({}, "", `?${params.toString()}`);
-
+if (city) {
+  localStorage.setItem("userCity", city);
   getWeather(city);
   cityInput.classList.add("hidden");
 }
@@ -130,12 +135,7 @@ themeCircles.forEach(circle => {
 
     weatherWidget.className = `widget ${theme} small-square`;
     localStorage.setItem("userTheme", theme);
-weatherWidget.className = `widget ${theme} small-square`;
-
-    const params = getParams();
-    params.set("theme", theme);
-    window.history.replaceState({}, "", `?${params.toString()}`);
-
+    
     themeOptions.classList.add("hidden");
   });
 });
