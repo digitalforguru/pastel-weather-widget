@@ -48,6 +48,11 @@ function copyWidgetLink() {
     message.classList.remove("hidden");
     message.classList.add("show");
   }
+  if (!isEmbed && copyLinkBtn) {
+  copyLinkBtn.style.display = "none";
+}
+
+} // ✅ CLOSE FUNCTION RIGHT HERE
 
   // 🌸 hide button after copying (ONLY in builder mode)
  
@@ -144,10 +149,6 @@ function getWeather(city) {
     });
 }
 
-if (!isEmbed && copyLinkBtn) {
-    copyLinkBtn.style.display = "none";
-  }
-}
 
 if (copyLinkBtn) {
   copyLinkBtn.addEventListener("click", copyWidgetLink);
