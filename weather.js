@@ -23,14 +23,17 @@ const iconMap = {
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
+// 🌸 EMBED MODE CLEANUP
 if (isEmbed) {
   const copyArea = document.querySelector(".setup-area");
   if (copyArea) copyArea.style.display = "none";
-} 
+}
+
 function buildWidgetURL(city, theme) {
   const base = window.location.origin + window.location.pathname;
   return `${base}?city=${encodeURIComponent(city)}&theme=${theme}&embed=true`;
 }
+
 function copyWidgetLink() {
   const city = localStorage.getItem("userCity") || "Los Angeles";
   const theme = localStorage.getItem("userTheme") || "pink";
@@ -46,18 +49,15 @@ function copyWidgetLink() {
     message.classList.add("show");
   }
 
-  // 🌸 hide button after copying
-  if (copyLinkBtn) {
-  // only allow button in builder mode
-  if (!isEmbed) {
-    copyLinkBtn.addEventListener("click", copyWidgetLink);
-  } else {
+  // 🌸 hide button after copying (ONLY in builder mode)
+  if (!isEmbed && copyLinkBtn) {
     copyLinkBtn.style.display = "none";
   }
 }
+
 // Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
-  const params = getParams();
+  const params = new URLSearchParams(window.location.search);
 
   const urlCity = params.get("city");
   const urlTheme = params.get("theme");
