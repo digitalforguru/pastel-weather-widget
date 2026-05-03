@@ -60,46 +60,59 @@ body {
 .widget.blue { background-color: #ddebf1; color: #4b5c74; }
 .widget.green { background-color: #ddedea; color: #5b6c5a; }
 
-/* Top left controls container */
-.top-left-controls {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  flex-direction: row; /* change this from column to row */
-  gap: 8px;
-  align-items: center; /* vertically center the buttons */
-  z-index: 10;
-}
-
 .usage-tip {
-  font-size: 11px;
-  line-height: 1.3;
-  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
 
-  background: rgba(255, 255, 255, 0.6);
-  padding: 8px 10px;
+  width: 90%;
 
-  border-radius: 12px;
+  background: rgba(255,255,255,0.75);
 
-  margin-bottom: 8px;
+  padding: 12px;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border-radius: 14px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 
   text-align: center;
 
-  text-transform: lowercase;
+  margin-bottom: 10px;
 }
 
 /* Buttons base */
 .btn {
   cursor: pointer;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  border-radius: 50%;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(6px);
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* label under buttons */
+.btn::after {
+  content: attr(title);
+
+  font-size: 9px;
+  margin-top: 3px;
+
+  opacity: 0.7;
 }
 
 
@@ -135,37 +148,58 @@ body {
 /* Theme options dropdown container */
 .theme-options {
   position: absolute;
-  top: 50%;
+  top: 60px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
+
   display: flex;
-  gap: 8px;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.85); /* semi-transparent */
-  padding: 8px 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
   z-index: 20;
 }
 
-
-/* Hide by default */
-.hidden {
-  display: none !important;
+/* title inside popup */
+.theme-options::before {
+  content: "select theme";
+  font-size: 10px;
+  opacity: 0.6;
+  margin-bottom: 4px;
 }
 
-/* Theme circle buttons (color options) */
+/* row of circles */
+.theme-options .themes-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* circles */
 .theme-circle {
-  width: 10px;
-  height: 10px;
+  width: 18px;
+  height: 18px;
+
   border-radius: 50%;
+
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: border-color 0.25s ease;
+
+  border: 2px solid rgba(0,0,0,0.08);
+
+  transition: transform 0.2s ease;
 }
 
 .theme-circle:hover {
-  border-color: #666;
+  transform: scale(1.2);
 }
 .weather-content {
   display: flex;
