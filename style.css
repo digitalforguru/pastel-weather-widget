@@ -430,3 +430,44 @@ body {
   opacity: 0.4;
 }
 
+.font-option {
+  font-size: 12px;
+  padding: 6px 10px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.6);
+
+  transition: all 0.2s ease;
+}
+
+.font-option:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.9);
+}
+.font-option[data-font="default"] {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.font-option[data-font="serif"] {
+  font-family: Georgia, serif;
+}
+
+.font-option[data-font="mono"] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.widget.font-default {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.widget.font-serif {
+  font-family: Georgia, serif;
+}
+
+.widget.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
