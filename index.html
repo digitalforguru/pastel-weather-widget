@@ -10,6 +10,9 @@
 
   <!-- 🌸 BUILDER MODE ONLY -->
   <div class="builder-ui">
+    <div class="widget-header">
+  DigitalGuru's Notion Weather Widget
+</div>
 
     <!-- Theme Options -->
     <div id="themeOptions" class="theme-options hidden">
@@ -21,8 +24,6 @@
 
 </div>
 
-    <!-- City Input -->
-    <input id="cityInput" class="city-input hidden" />
 
     <!-- Setup Text -->
     <div id="usageTip" class="usage-tip">
@@ -38,6 +39,11 @@
       <path d="M128 0C93 0 64 29 64 64c0 46 64 192 64 192s64-146 64-192C192 29 163 0 128 0zm0 88a24 24 0 1 1 0-48 24 24 0 0 1 0 48z"/>
     </svg>
   </div>
+      <div id="locationPopup" class="location-popup hidden">
+  <div class="location-title">type your city</div>
+
+  <input id="cityInput" class="city-input" placeholder="e.g. london, tokyo, la" />
+</div>
 
   <!-- Theme -->
   <div id="themeToggle" class="btn theme-toggle-btn" title="select theme"></div>
