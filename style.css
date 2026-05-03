@@ -79,21 +79,6 @@ body {
   background-color: transparent;
   box-sizing: border-box;
 }
-.copy-btn {
-  margin-top: 8px;
-  padding: 6px 10px;
-  font-size: 12px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: white;
-  color: #333;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.copy-btn:hover {
-  opacity: 0.8;
-}
 
 /* Theme options dropdown container */
 .theme-options {
@@ -185,5 +170,42 @@ body {
   user-select: auto;
   transition: opacity 0.25s ease;
   z-index: 11;
+}
+.setup-area {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.copy-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  background: #ffffff;
+  color: #444;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.copy-message {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #888;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copy-message.show {
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
 }
 
