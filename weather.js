@@ -4,6 +4,7 @@ const locationElement = document.getElementById("locationName");
 const temperatureElement = document.getElementById("temperature");
 const descriptionElement = document.getElementById("description");
 const cityInput = document.getElementById("cityInput");
+const locationPopup = document.getElementById("locationPopup");
 const locationBtn = document.getElementById("locationBtn");
 const themeToggle = document.getElementById("themeToggle");
 const themeOptions = document.getElementById("themeOptions");
@@ -114,13 +115,13 @@ if (copyLinkBtn) {
 
 // Show/hide city input on location icon button click
 locationBtn.addEventListener("click", () => {
-  cityInput.classList.toggle("hidden");
-  if (!cityInput.classList.contains("hidden")) {
+  locationPopup.classList.toggle("hidden");
+
+  if (!locationPopup.classList.contains("hidden")) {
     cityInput.focus();
   }
 });
 
-// Save and fetch weather on city input 'Enter' key press or losing focus
 cityInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -130,13 +131,21 @@ cityInput.addEventListener("keydown", (e) => {
     if (city) {
       localStorage.setItem("userCity", city);
       getWeather(city);
-      cityInput.classList.add("hidden");
+
+      locationPopup.classList.add("hidden");
     }
   }
 });
-
 cityInput.addEventListener("blur", () => {
-  cityInput.classList.add("hidden");
+  locationPopup.classList.add("hidden");
+});
+document.addEventListener("click", (e) => {
+  const isClickInsidePopup = locationPopup?.contains(e.target);
+  const isClickLocationBtn = locationBtn.contains(e.target);
+
+  if (!isClickInsidePopup && !isClickLocationBtn) {
+    locationPopup.classList.add("hidden");
+  }
 });
 
 // Toggle theme dropdown on main theme circle button click
