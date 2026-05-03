@@ -2,7 +2,7 @@
 body {
   margin: 0; padding: 10px;
   background: transparent;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Satoshi', sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -11,7 +11,7 @@ body {
 
 /* Widget */
 .widget {
-  background-color: #ffe7f5; /* default pink */
+  background-color: #f4dfeb; /* default pink */
   border-radius: 16px;
   padding: 12px 15px;
   width: 180px;
@@ -103,8 +103,8 @@ body {
 
 /* Theme circle buttons (color options) */
 .theme-circle {
-  width: 18px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid transparent;
