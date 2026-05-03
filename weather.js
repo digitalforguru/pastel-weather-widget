@@ -23,10 +23,9 @@ const iconMap = {
 const cloudIconURL = "https://i.pinimg.com/originals/e3/9d/e9/e39de96ddbf852ed53a4e9a993550641.gif";
 const apiKey = "8b38a4d3d6920110547bdaef3d73c0ba";
 
-// 🌸 EMBED MODE CLEANUP
 if (isEmbed) {
-  const copyArea = document.querySelector(".setup-area");
-  if (copyArea) copyArea.style.display = "none";
+  const builderUI = document.querySelector(".builder-ui");
+  if (builderUI) builderUI.style.display = "none";
 }
 
 function buildWidgetURL(city, theme) {
