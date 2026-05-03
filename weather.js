@@ -9,6 +9,9 @@ const locationBtn = document.getElementById("locationBtn");
 const themeToggle = document.getElementById("themeToggle");
 const themeOptions = document.getElementById("themeOptions");
 const themeCircles = document.querySelectorAll(".theme-circle");
+const fontToggle = document.getElementById("fontToggle");
+const fontOptions = document.getElementById("fontOptions");
+const fontChoices = document.querySelectorAll(".font-option");
 const copyLinkBtn = document.getElementById("copyLinkBtn");
 const params = new URLSearchParams(window.location.search);
 const isEmbed = params.get("embed") === "true";
@@ -52,10 +55,27 @@ function copyWidgetLink() {
   copyLinkBtn.style.display = "none";
 }
 
-} // ✅ CLOSE FUNCTION RIGHT HERE
+} 
 
-  // 🌸 hide button after copying (ONLY in builder mode)
- 
+fontToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  fontOptions.classList.toggle("hidden");
+});
+
+fontChoices.forEach(option => {
+  option.addEventListener("click", () => {
+    const font = option.getAttribute("data-font");
+
+    weatherWidget.classList.remove("font-default", "font-serif", "font-mono");
+    weatherWidget.classList.add(`font-${font}`);
+
+    localStorage.setItem("userFont", font);
+
+    fontOptions.classList.add("hidden");
+  });
+});
+
+
 locationBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
@@ -95,7 +115,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Load saved city & theme on page load
 window.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
 
@@ -104,6 +123,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const savedCity = urlCity || localStorage.getItem("userCity");
   const savedTheme = urlTheme || localStorage.getItem("userTheme");
+  const savedFont = localStorage.getItem("userFont");
+
+  if (savedFont) {
+  weatherWidget.classList.add(`font-${savedFont}`);
+  } else {
+  weatherWidget.classList.add("font-default");
+  }
 
   if (savedCity) {
     cityInput.value = savedCity;
@@ -119,7 +145,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Fetch weather and update UI
+
 function getWeather(city) {
   if (!city) return;
 
@@ -154,14 +180,10 @@ if (copyLinkBtn) {
   copyLinkBtn.addEventListener("click", copyWidgetLink);
 }
 
-// Show/hide city input on location icon button click
-
-// Toggle theme dropdown on main theme circle button click
 themeToggle.addEventListener("click", () => {
   themeOptions.classList.toggle("hidden");
 });
 
-// When a theme circle is clicked, update theme and save
 themeCircles.forEach(circle => {
   circle.addEventListener("click", () => {
     const theme = circle.getAttribute("data-theme");
@@ -171,4 +193,13 @@ themeCircles.forEach(circle => {
     
     themeOptions.classList.add("hidden");
   });
+document.addEventListener("click", (e) => {
+  const clickedInsideFont = fontOptions.contains(e.target);
+  const clickedFontBtn = fontToggle.contains(e.target);
+
+  if (!clickedInsideFont && !clickedFontBtn) {
+    fontOptions.classList.add("hidden");
+  }
+});
+  
 });
