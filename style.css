@@ -27,11 +27,10 @@ body {
 }
 
 /* Theme colors */
-.widget.pink { background-color: #ffe7f5; color: #60355c; }
-.widget.beige { background-color: #eed6c1; color: #5d4c3a; }
-.widget.purple { background-color: #f8e7fa; color: #7b5279; }
-.widget.blue { background-color: #dceaf5; color: #4b5c74; }
-.widget.green { background-color: #daece1; color: #5b6c5a; }
+.widget.pink { background-color: #f4dfeb; color: #60355c; }
+.widget.beige { background-color: #faebdd; color: #5d4c3a; }
+.widget.blue { background-color: #ddebf1; color: #4b5c74; }
+.widget.green { background-color: #ddedea; color: #5b6c5a; }
 
 /* Top left controls container */
 .top-left-controls {
