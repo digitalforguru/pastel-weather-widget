@@ -8,13 +8,11 @@
 </head>
   <body>
 
-  <!-- 🌸 BUILDER MODE ONLY -->
   <div class="builder-ui">
     <div class="widget-header">
   DigitalGuru's Notion Weather Widget
 </div>
 
-    <!-- Theme Options -->
     <div id="themeOptions" class="theme-options hidden">
 
   <div class="theme-circle pink" data-theme="pink"></div>
@@ -24,28 +22,26 @@
 
 </div>
 
-
-    <!-- Setup Text -->
+    
     <div id="usageTip" class="usage-tip">
       Welcome to your Notion widget by DigitalGuru!
       this widget will only work when you set up your location + theme on this page!
-      click to customize, copy your embed link and paste into Notion! 
+      - click options to customize
+      - copy your embed link
+      - paste into Notion! 
       enjoy your weather widget! ────୨ৎ──── 
     </div>
 
     <div class="top-left-controls">
 
-  <!-- Location button -->
   <div id="locationBtn" class="btn location-btn" title="type location">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
       <path d="M128 0C93 0 64 29 64 64c0 46 64 192 64 192s64-146 64-192C192 29 163 0 128 0zm0 88a24 24 0 1 1 0-48 24 24 0 0 1 0 48z"/>
     </svg>
   </div>
 
-  <!-- Theme button -->
   <div id="themeToggle" class="btn theme-toggle-btn" title="select theme"></div>
 
-  <!-- ⭐ MOVE POPUP HERE (important) -->
   <div id="locationPopup" class="location-popup hidden">
     <div class="location-title">type your city</div>
     <input id="cityInput" class="city-input" placeholder="e.g. london, tokyo, la" />
@@ -53,7 +49,6 @@
 
 </div>
 
-    <!-- Copy Button -->
     <div class="setup-area">
       <button id="copyLinkBtn" class="copy-btn">
         copy my embed Notion link .ᐟ.ᐟ
@@ -63,20 +58,8 @@
         copied! paste into notion .ᐟ.ᐟ
       </p>
     </div>
-
-  </div>
-
-  <div id="weatherWidget" class="widget pink small-square">
-
-    <div class="weather-content">
-      <img id="weatherIcon" />
-      <p id="locationName"></p>
-      <p id="temperature"></p>
-      <p id="description"></p>
-    </div>
-  </div>
-
-    <div class="footer-links">
+    
+<div class="footer-links">
 
   <a href="https://stan.store/digitalforguru" target="_blank" class="footer-link">
     shop templates
@@ -87,9 +70,22 @@
   <a href="https://tiktok.com/@digitaluru" target="_blank" class="footer-link">
     tiktok
   </a>
-
+  
 </div>
+  
+  </div>
 
+  <div id="weatherWidget" class="widget pink small-square">
+
+    <div class="weather-content">
+      <img id="weatherIcon" />
+      <p id="locationName"></p>
+      <p id="temperature"></p>
+      <p id="description"></p>
+    </div>
+    
+  </div>
+    
   <script src="weather.js"></script>
 </body>
 </html>
