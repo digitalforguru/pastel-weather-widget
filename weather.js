@@ -107,15 +107,14 @@ locationBtn.addEventListener("click", () => {
 cityInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
+
     const city = cityInput.value.trim();
+
     if (city) {
-  localStorage.setItem("userCity", city);
-getWeather(city);
-if (city) {
-  localStorage.setItem("userCity", city);
-  getWeather(city);
-  cityInput.classList.add("hidden");
-}
+      localStorage.setItem("userCity", city);
+      getWeather(city);
+      cityInput.classList.add("hidden");
+    }
   }
 });
 
