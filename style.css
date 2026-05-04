@@ -1,90 +1,80 @@
-/* Reset and base */
+/* =======================
+   BASE
+======================= */
 body {
-  margin: 0; padding: 10px;
+  margin: 0;
+  padding: 10px;
   background: transparent;
-  font-family: 'Satoshi', sans-serif;
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
+
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Widget */
-.widget {
-  background-color: #f4dfeb;
-  border-radius: 22px;
-
-  padding: 12px;
-
-  width: 180px;
-  height: 180px;
-
-  box-shadow:
-    0 12px 30px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.4);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  box-sizing: border-box;
-
-  position: relative;
-
+/* =======================
+   BUILDER LAYOUT
+======================= */
+.builder-ui {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 10px;
+}
 
-  gap: 6px;
+/* =======================
+   HEADER (matches other widgets)
+======================= */
+.widget-header {
+  font-size: 15px;
+  font-weight: 600;
 
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+
+  color: #444;
   text-align: center;
-  color: #000;
-  font-size: 0.8rem;
-  text-transform: lowercase;
-
-  user-select: none;
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  theme-color: #ffffff;
-}
-.widget:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.5);
 }
 
-/* Theme colors */
-.widget.pink { background-color: #f4dfeb; color: #60355c; }
-.widget.beige { background-color: #faebdd; color: #5d4c3a; }
-.widget.blue { background-color: #ddebf1; color: #4b5c74; }
-.widget.green { background-color: #ddedea; color: #5b6c5a; }
-
-.hidden {
-  display: none !important;
-}
-
+/* =======================
+   TIP BOX
+======================= */
 .usage-tip {
+  width: 260px;
   font-size: 12px;
   line-height: 1.4;
 
-  width: 260px;
+  padding: 14px;
+  border-radius: 16px;
 
   background: rgba(255,255,255,0.75);
-
-  padding: 14px;
-
-  border-radius: 16px;
+  backdrop-filter: blur(12px);
 
   box-shadow: 0 10px 24px rgba(0,0,0,0.08);
 
   text-align: center;
 }
 
-/* Buttons base */
-.btn {
-  cursor: pointer;
+/* =======================
+   CONTROLS ROW
+======================= */
+.top-left-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
 
+  margin: 8px 0;
+}
+
+/* buttons base */
+.btn {
   width: 56px;
   height: 56px;
 
@@ -96,11 +86,10 @@ body {
   box-shadow: 0 10px 22px rgba(0,0,0,0.08);
 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  gap: 4px;
+  cursor: pointer;
 
   transition: transform 0.2s ease;
 }
@@ -108,245 +97,34 @@ body {
 .btn:hover {
   transform: translateY(-2px) scale(1.05);
 }
-.top-left-controls {
-  position: relative; /* 🔥 THIS IS WHAT YOU WERE MISSING */
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
 
-  margin: 10px 0 6px;
-}
-/* Location button - solid white circle */
-.location-btn {
-  background: white;
-  border-radius: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.location-btn svg {
-  width: 18px;
-  height: 18px;
-  fill: #000;
-}
-
-/* Theme toggle button - transparent circle with white border */
-.theme-toggle-btn {
+/* theme circle button */
+.theme-btn {
   width: 20px;
   height: 20px;
 
+  border-radius: 50%;
   border: 2px solid white;
 
-  background-color: var(--theme-color, #f4dfeb);
-
-  border-radius: 50%;
-
-  box-sizing: border-box;
+  background: var(--theme-color, #f4dfeb);
 }
 
-/* Theme options dropdown container */
-.theme-options {
+/* =======================
+   POPUPS (shared system like horoscope/weather)
+======================= */
+.hidden {
+  display: none !important;
+}
+
+.sign-popup {
   position: absolute;
-  top: 68px;
+  top: 70px;
   left: 50%;
   transform: translateX(-50%);
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 16px;
-
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(16px);
-
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-
-  z-index: 20;
-}
-
-/* title inside popup */
-.theme-options::before {
-  content: "select theme";
-  font-size: 11px;
-  opacity: 0.6;
-}
-
-/* row of circles */
-.theme-options .themes-row {
-  display: flex;
-  gap: 10px;
-}
-
-/* circles */
-.theme-circle {
-  width: 22px;
-  height: 22px;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  border: 2px solid rgba(0,0,0,0.08);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.theme-circle:hover {
-  transform: scale(1.25);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-}
-.theme-circle.pink {
-  background-color: #f4dfeb;
-}
-
-.theme-circle.beige {
-  background-color: #faebdd;
-}
-
-.theme-circle.blue {
-  background-color: #ddebf1;
-}
-
-.theme-circle.green {
-  background-color: #ddedea;
-}
-.theme-circle.active {
-  border: 2px solid #333;
-  transform: scale(1.15);
-}
-
-.builder-ui {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 10px;
-}
-
-.weather-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 2px;
-
-  width: 100%;
-}
-
-/* Weather icon */
-#weatherIcon {
-  width: 72px;
-  height: 72px;
-
-  border-radius: 16px;
-
-  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
-
-  transform: scale(1);
-}
-
-/* Text styling */
-#locationName {
-  font-weight: 600;
-  font-size: 0.85rem;
-  opacity: 0.75;
-  letter-spacing: 0.4px;
-  margin: 0;
-}
-
-#temperature {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-#description {
-  font-size: 0.75rem;
-  opacity: 0.65;
-  margin: 0;
-}
-
-/* City input styling */
-.city-input {
-  position: absolute;
-  top: 10px;
-  left: 50px;
-  width: 100px;
-  padding: 4px 6px;
-  font-size: 0.75rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  color: #333;
-  outline: none;
-  user-select: auto;
-  transition: opacity 0.25s ease;
-  z-index: 11;
-}
-.setup-area {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.copy-btn {
-  padding: 8px 14px;
-  font-size: 13px;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-  background: #ffffff;
-  color: #444;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  transition: all 0.2s ease;
-}
-
-.copy-btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-.copy-message {
-  margin-top: 6px;
-  font-size: 12px;
-  color: #888;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.copy-message.show {
-  opacity: 1;
-}
-
-.hidden {
-  display: none;
-}
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.location-popup {
-  position: absolute;
-  top: 70px;
-  left: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 8px;
+  width: 200px;
 
   padding: 14px;
-  width: 180px;
-
   border-radius: 18px;
 
   background: rgba(255,255,255,0.95);
@@ -357,77 +135,50 @@ body {
   z-index: 50;
 }
 
-.location-title {
+/* popup title */
+.sign-title {
   font-size: 10px;
   opacity: 0.6;
-  text-transform: lowercase;
-}
-
-.location-popup .city-input {
-  position: static;
-  width: 100%;
   text-align: center;
-
-  border-radius: 10px;
-  border: 1px solid rgba(0,0,0,0.1);
-
-  padding: 6px;
-}
-.widget-header {
-  font-size: 15px;
-  font-weight: 600;
-
-  letter-spacing: 0.6px;
-
-  padding: 8px 16px;
-
-  border-radius: 999px;
-
-  background: linear-gradient(
-    to right,
-    rgba(255,255,255,0.9),
-    rgba(255,255,255,0.7)
-  );
-
-  backdrop-filter: blur(14px);
-
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-
-  text-align: center;
-
-  color: #444;
-
   margin-bottom: 8px;
 }
 
-.footer-links {
-  margin-top: 12px;
-
+/* theme row */
+.themes-row {
   display: flex;
-  align-items: center;
   justify-content: center;
-
-  gap: 8px;
-
-  font-size: 11px;
-
-  opacity: 0.65;
+  gap: 10px;
 }
 
-.footer-link {
-  text-decoration: none;
-  color: inherit;
+/* theme circles */
+.theme-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
 
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: 2px solid rgba(0,0,0,0.08);
+
+  transition: transform 0.2s ease;
 }
 
-.footer-link:hover {
-  opacity: 1;
-  transform: translateY(-1px);
+.theme-circle:hover {
+  transform: scale(1.2);
 }
 
-.divider {
-  opacity: 0.4;
+/* colors */
+.theme-circle.pink { background: #f9d5d3; }
+.theme-circle.beige { background: #f5f5dc; }
+.theme-circle.blue { background: #cfe7f3; }
+.theme-circle.green { background: #cce0d0; }
+
+/* =======================
+   FONT OPTIONS
+======================= */
+.font-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .font-option {
@@ -440,34 +191,71 @@ body {
 
   background: rgba(255,255,255,0.6);
 
-  transition: all 0.2s ease;
+  text-align: center;
 }
 
 .font-option:hover {
   transform: scale(1.05);
-  background: rgba(255,255,255,0.9);
-}
-.font-option[data-font="default"] {
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* fonts */
+.font-option[data-font="default"] {
+  font-family: ui-sans-serif, system-ui;
+}
 .font-option[data-font="serif"] {
   font-family: Georgia, serif;
 }
-
 .font-option[data-font="mono"] {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: ui-monospace, monospace;
 }
 
-.widget.font-default {
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+/* =======================
+   COPY AREA
+======================= */
+.setup-area {
+  text-align: center;
 }
 
-.widget.font-serif {
-  font-family: Georgia, serif;
+.copy-btn {
+  padding: 8px 14px;
+  border-radius: 14px;
+
+  border: none;
+  background: white;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+  cursor: pointer;
 }
 
-.widget.font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+.copy-message {
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
+.copy-message.show {
+  opacity: 1;
+}
+
+/* =======================
+   FOOTER
+======================= */
+.footer-links {
+  margin-top: 12px;
+
+  display: flex;
+  gap: 8px;
+
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-link:hover {
+  opacity: 1;
+}
